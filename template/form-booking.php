@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
 <style>
 body {
   background-color: green;
@@ -12,17 +18,21 @@ form.form1{
   font-size: 18px;
 }
 input {
-  border: 3px solid darkgreen;
+  border-collapse:collapse;
 }
 
  table{
   width: 100%;
+  border-collapse: collapse;
  }
 
 table, td, tr, th{
   align-self: center;
   border: 2px solid white;
+  text-align: center;
+ height: 60px;
  }
+
 </style>
 
 <div>
@@ -49,120 +59,129 @@ table, td, tr, th{
   <tr>
     <th>Price Table</th>
     <td>08:00-09:00 AM</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+    <td> 
+      <p>Kimheang</p>
+      <p>089252579</p>
+    </td>
+
+    <td><button> + </button></td>
+    <td><button> + </button></td>
+    <td><button> + </button></td>
+    <td><button> + </button></td>
   </tr>
   <tr>
     <th rowspan="13"></th>
     <td>09:00-10:00 AM</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+  <td><button> + </button></td>
+    <td><button> + </button></td>
+    <td><button> + </button></td>
+
+    <td> 
+      <p>Kimheang</p>
+      <p>089252579</p>
+    </td>
+    <td><button> + </button></td>
   </tr>
   <tr>
     <td>10:00-11:00 AM</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
   </tr>
   <tr>
     <td>11:00-12:00 PM</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
   </tr>
   <tr>
     <td>12:00-01:00 PM</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
   </tr>
   <tr>
     <td>01:00-02:00 PM</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
   </tr>
     <tr>
     <td>02:00-03:00 PM</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
   </tr>
     <tr>
     <td>03:00-04:00 PM</td>
-    <th></th>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
   </tr>
   <tr>
     <td>04:00-05:00 PM</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
   </tr>
   <tr>
     <td>05:00-06:00 PM</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
   </tr>
   <tr>
     <td>06:00-07:00 PM</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
   </tr>
     <tr>
     <td>07:00-08:00 PM</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
   </tr>
     <tr>
     <td>08:00-09:00 PM</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
   </tr>
     <tr>
     <td>09:00-10:00 PM</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
+  <td><button> + </button></td>
   </tr>
 
 </table>
 </form>
 </div>
 
-
+</body>
+</html>
