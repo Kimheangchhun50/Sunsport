@@ -1,0 +1,30 @@
+*{
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+}
+body {
+  background-color: green;
+  color: white;
+  font-size: 16px;
+}
+
+h1 {
+	font-size: 50px;
+}
+
+table{
+	width: 100%;
+	border-collapse: collapse;
+}
+
+table, td, tr, th{
+	align-self: center;
+	border: 2px solid white;
+	text-align: center;
+	height: 60px;
+}
+
+button{
+	padding: 10px;
+}
