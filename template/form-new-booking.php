@@ -7,8 +7,7 @@
 <body>
 <style>
 body {
-  background-color: green;
-  color: white;
+
   font-family: sans-serif;
 }
 
@@ -31,43 +30,54 @@ table, td, tr, th{
   width: 30%;
   height: 100%;
   text-align: left;
- }
-</style>
 
+ }
+ input {
+ 	width: 98%;
+ }
+
+</style>
+<center>
+<div>
 <form id="form3">
 
 <table>
-	<tr>
+	<tr style="background-color: green;">
 		<th colspan="2"><h4>New Booking</h4></th>  
 	</tr>
 	<tr>
 		<th>Date:</th>
-		<th></th>
+		<th><input type="Date" name="ndate"></th>
 	</tr>
 
 	<tr>
 		<th>Play Time:</th>
-		<th></th>
+		<th><input type="double" name="ptime"></th>
 	</tr>
 
 	 <tr>
 		<th>Clients Name:</th>
-		<th></th>
+		<th><input type="text-align" name="cname"></th>
 	</tr>
 	<tr>
-		<th>Phone Number1:</th>
-		<th></th>
+		<th>Phone Number:</th>
+		<th><input type="text-align" name="Phone"></th>
 	</tr>
-	   <tr>
+
+	<tr>
 	<th>Remark:</th>
-		<th></th>
+		<th><input type="text-align" name="Remark"></th>
 	</tr>
 
     <tr>
-    	<th><button type="" name="bsave">Save</button></th>
-    	<th><button type="" name="bcancel" style="background-color: red;">Cancel</button></th>
-  </tr>
+    	<th colspan="2">
+    		<button type="" style="background-color: green;">Save</button> 
+    		<button type="" style="background-color: red;">Cancel</button>
+    	</th>
+    </tr>
 </table>
 </form>
+</div>
+</center>
 </body>
 </html>
