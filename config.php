@@ -18,9 +18,7 @@ DEFINE('DB_PASS', '');
 
 
 // $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-
 // //check connection
-
 // if (!$conn) { 
-// 	echo "Connection error:" . mysqli_connect_error ();
+// 	die("Connection error:" . mysqli_connect_error() );
 // }

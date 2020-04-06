@@ -17,14 +17,75 @@ table{
 	width: 100%;
 	border-collapse: collapse;
 }
-
-table, td, tr, th{
+td,th{
 	align-self: center;
-	border: 2px solid white;
+	border: 1px solid white;
 	text-align: center;
-	height: 60px;
+	height: 52px;
 }
 
-button{
-	padding: 10px;
+.td-block{
+	min-width: 120px;
+}
+.td255{
+	width: 255px;
+}
+.td-head{
+	width: 100%;
+}
+button, input[type=submit]{
+	padding: 10px 20px;
+	cursor: pointer;
+}
+
+input {
+    padding: 5px 10px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+}
+.form{
+    max-width: 400px;
+    margin: 0 auto;
+    border: 1px solid #fff;
+    padding: 40px;
+    margin-top: 150px;
+    border-radius: 5px;
+}
+
+.form h2{
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+.error{
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid red;
+    margin-top: 20px;
+    background: #fff;
+    color: red;
+    border-radius: 5px;
+}
+
+.dashboard{
+	display: flex;
+}
+.dashboard .side{
+    /*width: 250px;*/
+    text-align: center;
+    padding: 20px;
+}
+.dashboard .side .logo{
+	margin: 20px 0;
+}
+.dashboard .side .logout{
+	margin: 20px 0;
+}
+.dashboard .side .logout a{
+	text-decoration: none;
+	color: #fff;
+	border: 1px solid #fff;
+    padding: 5px 20px;
+    border-radius: 5px;
 }
