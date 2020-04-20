@@ -48,10 +48,11 @@
 				<th>Remark:</th>
 					<th><textarea name="the_remark" id="" ></textarea></th>
 				</tr>
-
+				
 			    <tr>
 			    	<th colspan="2" class="center">
-			    		<input type="submit" value="Save" class="save" name="submit_booking">
+
+			    		<input type="submit" value="Save" class="save" name="submit_booking" data-name="<?php echo $c_name; ?>" data-phone="<?php echo $c_phone; ?>">
 			    		<input type="button" value="Cancel" class="cancel">
 			    	</th>
 			    </tr>

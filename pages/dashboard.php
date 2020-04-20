@@ -2,7 +2,7 @@
 
   include_once SITE_URI.'/db.php';
 
-  $today_timestamp = time('current_time');
+  $today_timestamp = time();
   $today_date = date($date_format, $today_timestamp);
   $the_date = isset($_GET['date'])?(strtotime($_GET['date'])?date($date_format, strtotime($_GET['date'])):$today_date):$today_date;
   $fields = array(
