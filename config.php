@@ -11,7 +11,9 @@ $site_url .= $_SERVER['HTTP_HOST']."/".$site_name;
 DEFINE("SITE_URL", $site_url);
 DEFINE('SITE_URI', __DIR__ );
 
-$date_format = 'Y-m-d';
-$time_format_12 = 'g:i A';
-$time_format_24 = 'H:i';
-$time_format = $time_format_12;
+$_date_format = 'Y-m-d';
+$_time_format_12 = 'g:i A';
+$_time_format_24 = 'H:i';
+$_time_format = $_time_format_12;
+
+require_once "db.php";
