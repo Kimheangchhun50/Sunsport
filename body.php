@@ -1,7 +1,7 @@
 <?php 
 
 $uri = substr( parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH), strlen($site_name)+1 );
-
+$current_url = SITE_URL.''.$uri;
 ?>
 
 <div class="container main">
@@ -33,6 +33,18 @@ $uri = substr( parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH), strlen($site_na
 		else if( $uri == '/edit-booking' || $uri=='/edit-booking/' ){
 			include_once SITE_URI."/init-data.php"; 
 			require_once SITE_URI."/templates/form-booking-edit.php";
+		}
+		else if( $uri == '/users' || $uri=='/users/' ){
+			include_once SITE_URI."/init-data.php"; 
+			require_once SITE_URI."/pages/users.php";
+		}
+		else if( $uri == '/reports' || $uri=='/reports/' ){
+			include_once SITE_URI."/init-data.php"; 
+			require_once SITE_URI."/pages/reports.php";
+		}
+		else if( $uri == '/pricing' || $uri=='/pricing/' ){
+			include_once SITE_URI."/init-data.php"; 
+			require_once SITE_URI."/pages/pricing.php";
 		}
 		else{
 			require_once SITE_URI."/pages/login.php";

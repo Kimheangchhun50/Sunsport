@@ -45,6 +45,7 @@ CREATE TABLE booking(
 	water double DEFAULT NULL,
 	extra double DEFAULT NULL,
 	remark text DEFAULT NULL,
+	status varchar(15) DEFAULT NULL,
 	date_created datetime DEFAULT CURRENT_TIMESTAMP
 );
 INSERT INTO booking(c_name, c_phone, the_date, from_time, to_time, field_name, field_type, field_group, price)

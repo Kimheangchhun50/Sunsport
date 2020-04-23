@@ -1,5 +1,5 @@
 jQuery(document).ready(function($){
-	// Date change
+	// Dashboard Date change
 	$('.dashboard').on('change', '#the_date', function(){
 		window.location.href = window.location.origin+window.location.pathname+'?date='+$(this).val();
 	});
@@ -9,20 +9,12 @@ jQuery(document).ready(function($){
 		$('.form-booking').fadeOut();
 	});
 
-
 	// Response
 	$('.btn-close-response').click(function(){
 		$(this.parentNode).fadeOut(100, function(){
 			$(this).remove();
 		});
 	});
-	// setTimeout(function(){
-	// 	if( $('.response').length>0 ){
-	// 		$('.response').fadeOut(100, function(){
-	// 			$(this).remove();
-	// 		});
-	// 	}
-	// }, 5000);
 
 	// Add new booking
 	$('.dashboard').on('click', '.add-booking', function(){
@@ -37,6 +29,7 @@ jQuery(document).ready(function($){
 		$($('.form-booking-new').find('[name=the_price]')[0]).val(the_price);
 	});
 	console.log(SITE_URL);
+	// Edit booking
 	$('.dashboard').on('click', '.edit-booking', function(){
 		var self = this;
 		var id = $(self).attr('data-id');
@@ -46,6 +39,24 @@ jQuery(document).ready(function($){
 			$($(this).find('.form-booking-edit')).fadeIn();
 		});
 	});
+
+	// Report type change
+	$('.report').on('change', '#report_type', function(){
+		window.location.href = window.location.origin+window.location.pathname+'?report='+$(this).val();
+	});
+
+	$('.report-dialy').on('change', '#the_date', function(){
+		window.location.href = window.location.origin+window.location.pathname+'?report=daily&date='+$(this).val();
+	});
+	$('.report-monthly').on('change', '#the_date', function(){
+		window.location.href = window.location.origin+window.location.pathname+'?report=monthly&date='+$(this).val();
+	});
+
+	$('.report-yearly #the_date').datepicker({dateFormat: 'Y', changeYear: true});
+	// $('.report-yearly').on('change', '#the_date', function(){
+	// 	// window.location.href = window.location.origin+window.location.pathname+'?report=yearly&date='+$(this).val();
+	// 	$(this).datepicker( "option", "Y", $( this ).val() );
+	// });
 
 
 });

@@ -156,6 +156,58 @@ textarea {
     color: #275a27;
 }
 
+.page-container {
+    padding: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.page-container .title {
+    padding: 20px 0;
+}
+/*report*/
+.report {
+}
+.report .header {
+    display: flex;
+}
+.report .header .title{
+    padding: 0;
+}
+.report .header select {
+    /*font-size: 20px;*/
+    margin-left: 20px;
+}
+.report .nav {
+    margin: 20px 0;
+}
+.report .nav .link {
+    padding: 10px 20px;
+    background: white;
+    color: black;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 5px;
+    line-height: 12px;
+}
+/**/
+
+.report .daily .summary {
+    width: 300px;
+    margin-top: 20px;
+}
+/*pricing*/
+.pricing {
+}
+
+.pricing .action{
+    padding: 20px 0;
+}
+/*users*/
+.users {
+}
+
+
+
 /**/
 .button{
     border: none;

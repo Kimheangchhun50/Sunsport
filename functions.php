@@ -177,3 +177,90 @@ function isAdmin($id){
     }
     return false;
 }
+
+function get_daily_reports($the_date){
+    $conn = conn();
+    $sql = 'SELECT *, (price+IFNULL(water, 0)+IFNULL(extra, 0)) as amount FROM booking WHERE the_date=?';
+    $stmt = mysqli_stmt_init($conn);
+    if( !mysqli_stmt_prepare($stmt, $sql) ){
+      die('<div class="error">SQL error</div>');
+    }
+    mysqli_stmt_bind_param($stmt, "s", $the_date);
+    mysqli_stmt_execute($stmt);
+    $r_bookings = mysqli_stmt_get_result($stmt);
+
+    $sql = 'SELECT count(*) as the_rows FROM booking WHERE the_date=?';
+    $stmt = mysqli_stmt_init($conn);
+    if( !mysqli_stmt_prepare($stmt, $sql) ){
+      die('<div class="error">SQL error</div>');
+    }
+    mysqli_stmt_bind_param($stmt, "s", $the_date);
+    mysqli_stmt_execute($stmt);
+    $r_total_booking = mysqli_stmt_get_result($stmt);
+
+    $sql = 'SELECT sum(price) as the_rows FROM booking WHERE the_date=?';
+    $stmt = mysqli_stmt_init($conn);
+    if( !mysqli_stmt_prepare($stmt, $sql) ){
+      die('<div class="error">SQL error</div>');
+    }
+    mysqli_stmt_bind_param($stmt, "s", $the_date);
+    mysqli_stmt_execute($stmt);
+    $r_total_amount = mysqli_stmt_get_result($stmt);
+
+    $sql = 'SELECT count(*) as the_rows FROM booking WHERE the_date=? AND status=?';
+    $stmt = mysqli_stmt_init($conn);
+    if( !mysqli_stmt_prepare($stmt, $sql) ){
+      die('<div class="error">SQL error</div>');
+    }
+    $status = 'cancel';
+    mysqli_stmt_bind_param($stmt, "ss", $the_date, $status);
+    mysqli_stmt_execute($stmt);
+    $r_total_cancel = mysqli_stmt_get_result($stmt);
+
+    mysqli_close($conn);
+    $r = array(
+        'bookings' => array(),
+        'total_booking' => 0,
+        'total_amount' => 0,
+        'total_cancel' => 0
+    );
+    if($r_bookings->num_rows>0){
+        while( $row = mysqli_fetch_assoc($r_bookings) ){
+            array_push($r['bookings'], $row);
+        }
+    }
+    if($r_total_booking->num_rows>0){
+        while( $row = mysqli_fetch_assoc($r_total_booking) ){
+            $r['total_booking'] = intval($row['the_rows']);
+        }
+    }
+    if($r_total_amount->num_rows>0){
+        while( $row = mysqli_fetch_assoc($r_total_amount) ){
+            $r['total_amount'] = intval($row['the_rows']);
+        }
+    }
+    if($r_total_cancel->num_rows>0){
+        while( $row = mysqli_fetch_assoc($r_total_cancel) ){
+            $r['total_cancel'] = intval($row['the_rows']);
+        }
+    }
+    return $r;
+}
+
+function get_users(){
+    $sql = 'SELECT * FROM users';
+    $conn = conn();
+    $stmt = mysqli_stmt_init($conn);
+    if( !mysqli_stmt_prepare($stmt, $sql) ){
+      die('<div class="error">SQL error</div>');
+    }
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    mysqli_close($conn);
+    if($result->num_rows<=0) return array();
+    $r = array();
+    while( $row = mysqli_fetch_assoc($result) ){
+        array_push($r, $row);
+    }
+    return $r;
+}
