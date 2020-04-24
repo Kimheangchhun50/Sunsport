@@ -42,24 +42,33 @@
 					</th>
 				</tr>
 				<!-- Water & Extra -->
+				<tr>
+					<th>Water($):</th>
+					<th><input type="number" name="the_water" value="<?php echo $booking['water']; ?>"></th>
+				</tr>
+				<tr>
+					<th>Extra($):</th>
+					<th><input type="number" name="the_extra" value="<?php echo $booking['extra']; ?>"></th>
+				</tr>
+				<!--  -->
 				 <tr>
 					<th>Clients Name:</th>
 					<th><input type="text" name="the_name" value="<?php echo $booking['c_name']; ?>"></th>
 				</tr>
 				<tr>
 					<th>Phone Number:</th>
-					<th><input type="number" name="the_phone" value="<?php echo $booking['c_phone']; ?>"></th>
+					<th><input type="text" name="the_phone" value="<?php echo $booking['c_phone']; ?>"></th>
 				</tr>
 
 				<tr>
 				<th>Remark:</th>
 					<th><textarea name="the_remark" id="" ><?php echo $booking['remark']; ?></textarea></th>
 				</tr>
-
 			    <tr>
 			    	<th colspan="2" class="center">
 			    		<input type="submit" value="Save" class="save" name="submit_booking">
-			    		<!-- <input type="button" value="Cancel Booking" class="cancel"> -->
+			    		<input type="button" value="Cancel" class="cancel">
+			    		<input type="button" value="Delete" class="delete">
 			    		<input type="button" value="Close" class="close">
 			    	</th>
 			    </tr>

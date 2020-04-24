@@ -2,12 +2,12 @@
 	
 	$report_type = isset($_GET['report'])?$_GET['report']:'daily';
 	if( $report_type == 'yearly' ){
-		$the_date = isset($_GET['date'])?(strtotime($_GET['date'])?date($_year_format, strtotime($_GET['date'])):date($_year_format, $_today_timestamp)):date($_year_format, $_today_timestamp);
-		$reports = get_daily_reports($the_date);
+		$the_date = isset($_GET['date'])?$_GET['date']:date($_year_format, $_today_timestamp);
+		$reports = get_yearly_reports($the_date);
 	}
 	else if( $report_type == 'monthly' ){
 		$the_date = isset($_GET['date'])?(strtotime($_GET['date'])?date($_month_format, strtotime($_GET['date'])):date($_month_format, $_today_timestamp)):date($_month_format, $_today_timestamp);
-		$reports = get_daily_reports($the_date);
+		$reports = get_monthly_reports($the_date);
 	}
 	else{
 		$the_date = isset($_GET['date'])?(strtotime($_GET['date'])?date($_date_format, strtotime($_GET['date'])):$_today_date):$_today_date;

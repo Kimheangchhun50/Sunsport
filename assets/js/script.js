@@ -52,11 +52,9 @@ jQuery(document).ready(function($){
 		window.location.href = window.location.origin+window.location.pathname+'?report=monthly&date='+$(this).val();
 	});
 
-	$('.report-yearly #the_date').datepicker({dateFormat: 'Y', changeYear: true});
-	// $('.report-yearly').on('change', '#the_date', function(){
-	// 	// window.location.href = window.location.origin+window.location.pathname+'?report=yearly&date='+$(this).val();
-	// 	$(this).datepicker( "option", "Y", $( this ).val() );
-	// });
+	$('.report-yearly').on('change', '#the_date', function(){
+		window.location.href = window.location.origin+window.location.pathname+'?report=yearly&date='+$(this).val();
+	});
 
 
 });

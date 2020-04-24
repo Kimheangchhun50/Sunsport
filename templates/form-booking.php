@@ -41,7 +41,7 @@
 				</tr>
 				<tr>
 					<th>Phone Number:</th>
-					<th><input type="number" name="the_phone"></th>
+					<th><input type="text" name="the_phone"></th>
 				</tr>
 
 				<tr>

@@ -1,111 +1,29 @@
+<?php 
+
+	$tab = isset($_GET['tab'])?empty($_GET['tab'])?'user-list':$_GET['tab']:'user-list';
+ ?>
 <div class="page-container users">
-	<h2 class="title">Users</h2>
-	<div class="user-list">
-		<?php $users = get_users(); ?>
-		<table border="1">
-			<thead>
-				<tr>
-					<th>No</th>
-					<th>Name</th>
-					<th>Username</th>
-					<th>Role</th>
-				</tr>
-			</thead>
-			<tbody>
-				<?php $i=0; foreach( $users as $user ): $i++; ?>
-				<tr>
-					<td><?php echo $i ?></td>
-					<td><?php echo $user['name'] ?></td>
-					<td><?php echo $user['username'] ?></td>
-					<td><?php echo $user['role'] ?></td>
-				</tr>
-				<?php endforeach; ?>					
-			</tbody>
-		</table>
+	<div class="tabs">
+		<div class="tabs-item">
+			<a class="<?php echo $tab=='user-list'?'active':''; ?>" href="<?php echo SITE_URL; ?>/users?tab=user-list">Users</a>
+			<a class="<?php echo $tab=='user-add'?'active':''; ?>" href="<?php echo SITE_URL; ?>/users?tab=user-add">Add User</a>
+			<a class="<?php echo $tab=='user-edit'?'active':''; ?>" href="<?php echo SITE_URL; ?>/users?tab=user-edit">Edit User</a>
+		</div>
+		<div class="tabs-content">
+			<?php
+				if( $tab == 'user-change-password' ){
+					include_once SITE_URI.'/templates/user-change-password.php';
+				}
+				elseif( $tab == 'user-edit' ){
+					include_once SITE_URI.'/templates/user-edit.php';
+				}
+				elseif( $tab == 'user-add' ){
+					include_once SITE_URI.'/templates/user-add.php';
+				}
+				else{
+					include_once SITE_URI.'/templates/user-list.php';
+				}
+			?>
+		</div>
 	</div>
-	
-
-	<div class="user-add">
-		<form class="form" action="">
-			<h2 class="title">Add User</h2>
-			<table >
-				<tr>
-					<td>Name</td>
-					<td><input type="text"></td>
-				</tr>
-				<tr>
-					<td>Role</td>
-					<td>
-						<select name="" id="">
-							<option value="">Admin</option>
-							<option value="">User</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td>Username</td>
-					<td><input type="text"></td>
-				</tr>
-				<tr>
-					<td>Password</td>
-					<td><input type="password"></td>
-				</tr>
-				<tr>
-					<td>Confirm Password</td>
-					<td><input type="password"></td>
-				</tr>
-				<tr>
-					<td><input class="save" type="submit" value="Save"></td>
-				</tr>
-			</table>
-		</form>
-	</div>
-
-	<div class="user-edit">
-		<form class="form" action="">
-			<h2 class="title">Edit User</h2>
-			<table >
-				<tr>
-					<td>Name</td>
-					<td><input type="text"></td>
-				</tr>
-				<tr>
-					<td>Role</td>
-					<td>
-						<select name="" id="">
-							<option value="">Admin</option>
-							<option value="">User</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td><input class="save" type="submit" value="Save"></td>
-				</tr>
-			</table>
-		</form>
-	</div>
-
-	<div class="user-change-password">
-		<form class="form" action="">
-			<h2 class="title">Change Password</h2>
-			<table >
-				<tr>
-					<td>Current Password</td>
-					<td><input type="password"></td>
-				</tr>
-				<tr>
-					<td>New Password</td>
-					<td><input type="password"></td>
-				</tr>
-				<tr>
-					<td>Confirm Password</td>
-					<td><input type="password"></td>
-				</tr>
-				<tr>
-					<td><input class="save" type="submit" value="Save"></td>
-				</tr>
-			</table>
-		</form>
-	</div>
-
 </div>

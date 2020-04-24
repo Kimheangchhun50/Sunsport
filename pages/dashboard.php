@@ -40,9 +40,13 @@
     </tr>
     <tr>
       <th class="td255">
-        <label name="date">Date:</label>
-        <input type="date" value="<?php echo $the_date; ?>" id="the_date">
-        <input type="hidden" value="<?php echo $the_date; ?>" id="date">
+        <div class="nav">
+          <label name="date">Date:</label>
+          <input type="date" value="<?php echo $the_date; ?>" id="the_date">
+          <input type="hidden" value="<?php echo $the_date; ?>" id="date">
+          <a class="link" href="<?php echo $current_url.'?date='.date('Y-m-d', strtotime('-1 day', strtotime($the_date))); ?>"><</a>
+          <a class="link" href="<?php echo $current_url.'?date='.date('Y-m-d', strtotime('+1 day', strtotime($the_date))); ?>">></a>
+        </div>
       </th>
       <th colspan="5">Fields</th>
     </tr>

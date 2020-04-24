@@ -49,6 +49,7 @@ td,th{
     right: 0;
     bottom: 0;
     left: 0;
+    overflow: auto;
     display: none;
 }
 .form{
@@ -56,7 +57,8 @@ td,th{
     margin: 0 auto;
     border: 1px solid #fff;
     padding: 40px;
-    margin-top: 150px;
+    margin-top: 100px;
+    margin-bottom: 100px;
     border-radius: 5px;
     background: #275a27;
 }
@@ -116,6 +118,14 @@ textarea {
 /*Dashboard*/
 .dashboard{
 	display: flex;
+}
+.dashboard .nav{
+    display: flex;
+    padding: 10px;
+    align-items: center;
+}
+.dashboard .nav .link{
+    padding: 10px 8px;
 }
 .dashboard .side{
     /*width: 250px;*/
@@ -180,7 +190,7 @@ textarea {
 .report .nav {
     margin: 20px 0;
 }
-.report .nav .link {
+.nav .link {
     padding: 10px 20px;
     background: white;
     color: black;
@@ -188,13 +198,15 @@ textarea {
     display: inline-block;
     border-radius: 5px;
     line-height: 12px;
+    margin-left: 5px;
 }
-/**/
-
-.report .daily .summary {
+.report .summary {
     width: 300px;
     margin-top: 20px;
 }
+/**/
+
+
 /*pricing*/
 .pricing {
 }
@@ -203,7 +215,24 @@ textarea {
     padding: 20px 0;
 }
 /*users*/
-.users {
+.users .form{
+    margin-top: 20px;
+    margin-left: 0;
+}
+.tabs-item a {
+    text-decoration: none;
+    color: #275a27;
+    background: #c3c3c3;
+    padding: 10px 20px;
+    display: inline-block;
+    border-radius: 5px;
+}
+.tabs-item a.active {
+    background: #fff;
+}
+.user-list td a{
+    margin-right: 10px;
+    color: yellow;
 }
 
 
@@ -286,6 +315,10 @@ textarea {
 }
 .cancel{
     background: red;
+    color: white;
+}
+.delete{
+    background: #F44336;
     color: white;
 }
 .close{
