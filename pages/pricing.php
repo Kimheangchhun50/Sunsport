@@ -1,3 +1,6 @@
+<?php 
+	if( !isAdmin($_SESSION['userid']) ) die('<div class="error">No access</div>');
+?>
 <div class="page-container pricing">
 	<h2 class="title">Pricing</h2>
 	<?php if( is_array($_pricingS) && sizeof($_pricingS)>0 ): ?>

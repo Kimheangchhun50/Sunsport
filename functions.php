@@ -13,14 +13,14 @@ function get_bookings($the_date, $from_time, $field_name){
     mysqli_close($conn);
     return $result;
 }
-function get_booking_type_count($the_date, $from_time, $field_type){
-    $sql = 'SELECT count(*) as booking_rows FROM booking WHERE the_date=? AND from_time=? AND field_type=?';
+function get_booking_type_count($the_date, $from_time, $field_type, $id_out=0){
+    $sql = 'SELECT count(*) as booking_rows FROM booking WHERE the_date=? AND from_time=? AND field_type=? AND id<>?';
     $conn = conn();
     $stmt = mysqli_stmt_init($conn);
     if( !mysqli_stmt_prepare($stmt, $sql) ){
       die('<div class="error">SQL error</div>');
     }
-    mysqli_stmt_bind_param($stmt, "sss", $the_date, $from_time, $field_type);
+    mysqli_stmt_bind_param($stmt, "sssi", $the_date, $from_time, $field_type, $id_out);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
     $booking_rows = 0;
@@ -32,15 +32,14 @@ function get_booking_type_count($the_date, $from_time, $field_type){
     mysqli_close($conn);
     return $booking_rows;
 }
-
-function get_booking_count($the_date, $from_time, $field_name){
-    $sql = 'SELECT count(*) as booking_rows FROM booking WHERE the_date=? AND from_time=? AND field_name=?';
+function get_booking_count($the_date, $from_time, $field_name, $id_out=0){
+    $sql = 'SELECT count(*) as booking_rows FROM booking WHERE the_date=? AND from_time=? AND field_name=? AND id<>?';
     $conn = conn();
     $stmt = mysqli_stmt_init($conn);
     if( !mysqli_stmt_prepare($stmt, $sql) ){
       die('<div class="error">SQL error</div>');
     }
-    mysqli_stmt_bind_param($stmt, "sss", $the_date, $from_time, $field_name);
+    mysqli_stmt_bind_param($stmt, "sssi", $the_date, $from_time, $field_name, $id_out);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
     $booking_rows = 0;
@@ -135,6 +134,39 @@ function add_booking( $data = array() ){
     $result = mysqli_stmt_execute($stmt);
     mysqli_close($conn);
     return $result;
+}
+
+function edit_booking( $data = array() ){
+    if( !isset($data['c_name']) || !isset($data['c_phone']) || !isset($data['the_date']) || !isset($data['from_time']) || !isset($data['to_time']) || !isset($data['field_name']) || !isset($data['field_type']) || !isset($data['field_group']) || !isset($data['price']) || !isset($data['id']) ){
+        return false;
+    }
+    if( empty($data['c_name']) || empty($data['c_phone']) || empty($data['the_date']) || empty($data['from_time']) || empty($data['to_time']) || empty($data['field_name']) || empty($data['field_type']) || empty($data['field_group']) || empty($data['price']) || empty($data['id']) ){
+        return false;
+    }
+
+    $sql = "UPDATE booking SET c_name=?, c_phone=?, the_date=?, from_time=?, to_time=?, field_name=?, field_type=?, field_group=?, price=?, remark=? WHERE id=?";
+    $conn = conn();
+    $stmt = mysqli_stmt_init($conn);
+    if( !mysqli_stmt_prepare($stmt, $sql) ){
+      die('<div class="error">SQL error</div>');
+    }
+    mysqli_stmt_bind_param($stmt, "ssssssssisi", $data['c_name'], $data['c_phone'], $data['the_date'], $data['from_time'], $data['to_time'], $data['field_name'], $data['field_type'], $data['field_group'], intval($data['price']), $data['remark'], $data['id']);
+    $result = mysqli_stmt_execute($stmt);
+    mysqli_close($conn);
+    return $result;
+}
+function delete_booking( $id){
+    if($id<=0) return false;
+    $sql = 'DELETE FROM booking WHERE id=?';
+    $conn = conn();
+    $stmt = mysqli_stmt_init($conn);
+    if( !mysqli_stmt_prepare($stmt, $sql) ){
+      die('<div class="error">SQL error</div>');
+    }
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    $r = mysqli_stmt_execute($stmt);
+    mysqli_close($conn);
+    return $r;
 }
 
 function get_booking($id){
@@ -352,9 +384,6 @@ function get_yearly_reports_summary($the_year){
     $the_date_start = $the_year.'-01-01';
     $the_date_end = date('Y-m-d', strtotime('+1 year', strtotime($the_year.'-01-01')));
 
-    var_dump($the_date_end);
-    var_dump($the_date_start);
-
     $sql = 'SELECT count(*) as the_rows FROM booking WHERE the_date>=? AND the_date<?';
     $stmt = mysqli_stmt_init($conn);
     if( !mysqli_stmt_prepare($stmt, $sql) ){
@@ -408,7 +437,8 @@ function get_yearly_reports_summary($the_year){
     }
     return $r;
 }
-
+//=============================================================================================================
+// users
 function get_users(){
     $sql = 'SELECT * FROM users';
     $conn = conn();
@@ -423,6 +453,177 @@ function get_users(){
     $r = array();
     while( $row = mysqli_fetch_assoc($result) ){
         array_push($r, $row);
+    }
+    return $r;
+}
+function get_user($id=0){
+    $sql = 'SELECT * FROM users WHERE id=?';
+    $conn = conn();
+    $stmt = mysqli_stmt_init($conn);
+    if( !mysqli_stmt_prepare($stmt, $sql) ){
+      die('<div class="error">SQL error</div>');
+    }
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+
+    mysqli_close($conn);
+    if($result->num_rows<=0) return array();
+    $r = array();
+    while( $row = mysqli_fetch_assoc($result) ){
+        $r = $row;
+    }
+    return $r;
+}
+function username_existed($username=''){
+    $sql = 'SELECT count(*) as the_rows FROM users WHERE username=?';
+    $conn = conn();
+    $stmt = mysqli_stmt_init($conn);
+    if( !mysqli_stmt_prepare($stmt, $sql) ){
+      die('<div class="error">SQL error '.mysqli_error($conn).'</div>');
+    }
+    mysqli_stmt_bind_param($stmt, "s", $username);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $the_rows = 0;
+    if($result->num_rows>0){
+      while( $row = mysqli_fetch_assoc($result) ){
+        $the_rows = $row['the_rows'];
+      }
+    }
+    mysqli_close($conn);
+    return $the_rows;
+}
+function add_user( $data = array() ){
+    if( !isset($data['the_name']) || !isset($data['the_role']) || !isset($data['the_username']) || !isset($data['the_password']) ){
+        return false;
+    }
+    if( empty($data['the_name']) || empty($data['the_role']) || empty($data['the_username']) || empty($data['the_password']) ){
+        return false;
+    }
+
+    $sql = "INSERT INTO users(name, role, username, password) value(?,?,?,?)";
+    $conn = conn();
+    $stmt = mysqli_stmt_init($conn);
+    if( !mysqli_stmt_prepare($stmt, $sql) ){
+      die('<div class="error">SQL error '.mysqli_error($conn).'</div>');
+    }
+    mysqli_stmt_bind_param($stmt, "ssss", $data['the_name'], $data['the_role'], $data['the_username'], $data['the_password'] );
+    $result = mysqli_stmt_execute($stmt);
+    mysqli_close($conn);
+    return $result;
+}
+function edit_user($data){
+    if( !isset($data['the_name']) || !isset($data['the_role']) || !isset($data['the_id']) ){
+        return false;
+    }
+    if( empty($data['the_name']) || empty($data['the_role']) || empty($data['the_id']) ){
+        return false;
+    }
+
+    $sql = "UPDATE users SET name=?, role=? WHERE id=?";
+    $conn = conn();
+    $stmt = mysqli_stmt_init($conn);
+    if( !mysqli_stmt_prepare($stmt, $sql) ){
+      die('<div class="error">SQL error '.mysqli_error($conn).'</div>');
+    }
+    mysqli_stmt_bind_param($stmt, "ssi", $data['the_name'], $data['the_role'], $data['the_id'] );
+    $result = mysqli_stmt_execute($stmt);
+    mysqli_close($conn);
+    return $result;
+}
+function delete_user($id=0){
+    if($id<=0) return false;
+    $sql = 'DELETE FROM users WHERE id=?';
+    $conn = conn();
+    $stmt = mysqli_stmt_init($conn);
+    if( !mysqli_stmt_prepare($stmt, $sql) ){
+      die('<div class="error">SQL error</div>');
+    }
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    $r = mysqli_stmt_execute($stmt);
+    mysqli_close($conn);
+    return $r;
+}
+//=============================================================================================================
+
+function generate_billing_number(){
+    $sql = 'SELECT IFNULL(max(billing_number), 0) as the_row FROM billing';
+    $conn = conn();
+    $stmt = mysqli_stmt_init($conn);
+    if( !mysqli_stmt_prepare($stmt, $sql) ){
+      die('<div class="error">SQL error</div>');
+    }
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $the_row = 0;
+    if($result->num_rows>0){
+      while( $row = mysqli_fetch_assoc($result) ){
+        $the_row = $row['the_row'];
+      }
+    }
+    mysqli_close($conn);
+    return intval($the_row) + 1;
+}
+// var_dump(generate_billing_number());
+function submit_billing( $data = array() ){
+    if( !isset($data['booking_id']) || !isset($data['billing_number']) || !isset($data['price']) || !isset($data['user_id']) ){
+        return false;
+    }
+    if( empty($data['booking_id']) || empty($data['billing_number']) || empty($data['price']) || empty($data['user_id']) ){
+        return false;
+    }
+
+    $sql = "INSERT INTO billing(booking_id, billing_number, price, water, extra, user_id) value(?,?,?,?,?,?);";
+    $conn = conn();
+    $stmt = mysqli_stmt_init($conn);
+    if( !mysqli_stmt_prepare($stmt, $sql) ){
+      die('<div class="error">SQL error</div>');
+    }
+    mysqli_stmt_bind_param($stmt, "iiiiii", $data['booking_id'], $data['billing_number'], $data['price'], $data['water'], $data['extra'], $data['user_id']);
+    $result = mysqli_stmt_execute($stmt);
+    $id =  mysqli_insert_id($conn);    
+    mysqli_close($conn);
+    return $id;
+}
+
+function billing_exist($booking_id){
+    $sql = 'SELECT count(*) as the_row FROM billing WHERE booking_id=?';
+    $conn = conn();
+    $stmt = mysqli_stmt_init($conn);
+    if( !mysqli_stmt_prepare($stmt, $sql) ){
+      die('<div class="error">SQL error</div>');
+    }
+    mysqli_stmt_bind_param($stmt, "i", $booking_id); 
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $the_row = 0;
+    if($result->num_rows>0){
+      while( $row = mysqli_fetch_assoc($result) ){
+        $the_row = intval($row['the_row']);
+      }
+    }
+    if($the_row>0) return true;
+    mysqli_close($conn);
+    return false;
+}
+
+function get_booking_billing($id){
+    if( intval($id) <=0 ) return false;
+    $sql = 'SELECT * FROM booking INNER JOIN billing ON `booking`.`id`=`billing`.`booking_id` WHERE `booking`.`id`=?';
+    $conn = conn();
+    $stmt = mysqli_stmt_init($conn);
+    if( !mysqli_stmt_prepare($stmt, $sql) ){
+      die('<div class="error">SQL error</div>');
+    }
+    mysqli_stmt_bind_param($stmt, "i", intval($id));
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    mysqli_close($conn);
+    if($result->num_rows<=0) return false;
+    $r = false;
+    while( $row = mysqli_fetch_assoc($result) ){
+        $r = $row;
     }
     return $r;
 }

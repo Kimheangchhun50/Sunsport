@@ -17,28 +17,129 @@ jQuery(document).ready(function($){
 	});
 
 	// Add new booking
+	// $('.dashboard').on('click', '.add-booking', function(){
+	// 	var the_date = $('#the_date').val();
+	// 	var the_time = $(this).attr('data-time');
+	// 	var the_field = $(this).attr('data-field');
+	// 	var the_price = $(this).attr('data-price');
+	// 	$('.form-booking-new').fadeIn();
+	// 	$($('.form-booking-new').find('[name=the_date]')[0]).val(the_date);
+	// 	$($('.form-booking-new').find('[name=the_time]')[0]).val(the_time);
+	// 	$($('.form-booking-new').find('[name=the_field]')[0]).val(the_field);
+	// 	$($('.form-booking-new').find('[name=the_price]')[0]).val(the_price);
+	// });
+	// New booking
 	$('.dashboard').on('click', '.add-booking', function(){
 		var the_date = $('#the_date').val();
 		var the_time = $(this).attr('data-time');
 		var the_field = $(this).attr('data-field');
 		var the_price = $(this).attr('data-price');
-		$('.form-booking-new').fadeIn();
-		$($('.form-booking-new').find('[name=the_date]')[0]).val(the_date);
-		$($('.form-booking-new').find('[name=the_time]')[0]).val(the_time);
-		$($('.form-booking-new').find('[name=the_field]')[0]).val(the_field);
-		$($('.form-booking-new').find('[name=the_price]')[0]).val(the_price);
+		var date=$('#the_date').val();
+		var link = SITE_URL+'/add-booking/?date='+date+'&the_date='+the_date+'&the_time='+the_time+'&the_field='+the_field+'&the_price='+the_price+' #form-booking-new';
+		// console.log(link);
+		$('#view').load(link, function(){
+			$($(this).find('.form-booking-new')).fadeIn();
+		});
 	});
-	console.log(SITE_URL);
 	// Edit booking
 	$('.dashboard').on('click', '.edit-booking', function(){
 		var self = this;
 		var id = $(self).attr('data-id');
-		var link = SITE_URL+'/edit-booking/?id='+id+' #form-booking-edit';
-		console.log(link);
+		var date=$('#the_date').val();
+		var link = SITE_URL+'/edit-booking/?id='+id+'&date='+date+' #form-booking-edit';
+		link = link.replace(/\s/g, '%20');
 		$('#view').load(link, function(){
 			$($(this).find('.form-booking-edit')).fadeIn();
 		});
 	});
+	// submit Edit booking
+	$('#view').on('change', '.form-control', function(){
+		var id = $('#view #booking_edit_id').val();
+		var the_name = $('[name=the_name]').val();
+		var the_phone = $('[name=the_phone]').val();
+		var the_date = $('[name=the_date]').val();
+		var the_field = $('[name=the_field]').val();
+		var the_time = $('[name=the_time]').val();
+		var the_remark = $('[name=the_remark]').val();
+		var date=$('#the_date').val();
+
+		var link = SITE_URL+'/submit-booking-edit/?id='+id+'&date='+date+'&the_name='+the_name+'&the_phone='+the_phone+'&the_date='+the_date+'&the_field='+the_field+'&the_time='+the_time+'&the_remark='+the_remark.trim()+'';
+		link = link.replace(/\s/g, '%20');
+		$('#view #booking_save').attr('href', link);
+	});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	// Billing
+	$('.billing-update').on('change', function(){
+		var total = Number($('#billing-price').val()) + Number($('#billing-water').val()) + Number($('#billing-extra').val());
+		$('#billing-total').text(total);
+	});
+
+	// $('.main').on('click', '#booking_checkout', function(){
+	// 	var self = this;
+	// 	var id = $(self).attr('data-id');
+	// 	var link = SITE_URL+'/billing/?id='+id+' #form-billing';
+
+	// 	$('#view').load(link, function(){
+	// 		$($(this).find('.form-booking-edit')).fadeIn();
+	// 	});
+	// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	// Report type change
 	$('.report').on('change', '#report_type', function(){

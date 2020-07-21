@@ -1,14 +1,15 @@
+<?php if( !isAdmin($_SESSION['userid']) ) die('<div class="error">No access</div>'); ?>
 <h2 class="title">Users</h2>
 <div class="user-list">
 	<?php $users = get_users(); ?>
 	<table border="1">
 		<thead>
 			<tr>
-				<th>No</th>
-				<th>Name</th>
-				<th>Username</th>
-				<th>Role</th>
-				<th>Action</th>
+				<th class="td-center">No</th>
+				<th class="td-center">Name</th>
+				<th class="td-center">Username</th>
+				<th class="td-center">Role</th>
+				<th class="td-center">Action</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -21,6 +22,7 @@
 				<td>
 					<a href="<?php echo SITE_URL; ?>/users?tab=user-change-password&id=<?php echo $user['id'] ?>">Password</a>
 					<a href="<?php echo SITE_URL; ?>/users?tab=user-edit&id=<?php echo $user['id'] ?>">Edit</a>
+					<a href="<?php echo SITE_URL; ?>/submit-user-delete?id=<?php echo $user['id'] ?>">Delete</a>
 				</td>
 			</tr>
 			<?php endforeach; ?>					

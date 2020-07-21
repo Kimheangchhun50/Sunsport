@@ -1,4 +1,5 @@
 <?php 
+	if( !isAdmin($_SESSION['userid']) ) die('<div class="error">No access</div>');
 
 	$tab = isset($_GET['tab'])?empty($_GET['tab'])?'user-list':$_GET['tab']:'user-list';
  ?>
@@ -7,7 +8,9 @@
 		<div class="tabs-item">
 			<a class="<?php echo $tab=='user-list'?'active':''; ?>" href="<?php echo SITE_URL; ?>/users?tab=user-list">Users</a>
 			<a class="<?php echo $tab=='user-add'?'active':''; ?>" href="<?php echo SITE_URL; ?>/users?tab=user-add">Add User</a>
+			<?php if( $tab == 'user-edit' ): ?>
 			<a class="<?php echo $tab=='user-edit'?'active':''; ?>" href="<?php echo SITE_URL; ?>/users?tab=user-edit">Edit User</a>
+			<?php endif; ?>
 		</div>
 		<div class="tabs-content">
 			<?php

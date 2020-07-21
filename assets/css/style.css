@@ -37,7 +37,11 @@ td,th{
 	width: 255px;
 }
 .td-head{
-	width: 100%;
+	width: 100%;    
+}
+.td-center{
+    text-align: center;
+    padding: 10px 5px;
 }
 
 /*Form*/
@@ -53,7 +57,7 @@ td,th{
     display: none;
 }
 .form{
-    max-width: 500px;
+    max-width: 520px;
     margin: 0 auto;
     border: 1px solid #fff;
     padding: 40px;
@@ -67,7 +71,8 @@ td,th{
 .form input[type=password],
 .form input[type=number],
 .form select,
-.form textarea
+.form textarea,
+.form .text
 {
     width: 100%;
     margin-bottom: 10px;
@@ -85,11 +90,26 @@ td,th{
     border: 1px solid #fff;
     padding: 10px;
 }
+/*.btn{
+    color: white;
+    text-decoration: none;
+}*/
 button, 
 input[type=button],
-input[type=submit]{
+input[type=submit],
+.btn{
     padding: 10px 20px;
+    border-radius: 5px;
+    border: 1px solid #fff;
     cursor: pointer;
+}
+button a,
+.btn{
+    display: inline-block;
+    text-decoration: none;
+    color:black;
+    background: white;
+    padding: 8px 20px;
 }
 input,
 select,
@@ -236,6 +256,47 @@ textarea {
 }
 
 
+/*billing*/
+.billing{
+    /*display: flex;
+    flex-wrap: wrap;*/
+    width: 500px;
+    border: 1px solid;
+    padding: 5px 15px;
+}
+
+.form-billing{
+    /*width: 500px;*/
+    text-align: left;
+}
+
+.form-billing td, th {
+    text-align: left;
+    height: auto;
+    padding: 5px 0;
+}
+.form-billing table input{
+    width: 100%;
+}
+.print-preview{
+    width: 500px;
+}
+.billing-brand{
+    text-align: center;
+    padding: 20px 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**/
 .button{
@@ -273,6 +334,16 @@ textarea {
     color: red;
     border-radius: 5px;
 }
+.success{
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid green;
+    margin-top: 20px;
+    background: #fff;
+    color: green;
+    border-radius: 5px;
+}
 .response {
     position: fixed;
     top: 23px;
@@ -284,6 +355,9 @@ textarea {
     min-height: 80px;
     padding: 10px;
     border-radius: 5px;
+}
+.checkout{
+    background: #00b500;
 }
 .btn.btn-close-response {
     background: none;

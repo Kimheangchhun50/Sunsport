@@ -1,4 +1,5 @@
 <?php 
+	if( !isAdmin($_SESSION['userid']) ) die('<div class="error">No access</div>');
 	
 	$report_type = isset($_GET['report'])?$_GET['report']:'daily';
 	if( $report_type == 'yearly' ){

@@ -20,4 +20,7 @@ $_time_format_24 = 'H:i';
 $_time_format = $_time_format_12;
 
 $the_date_format = 'd-m-Y';
+$the_time_format = $_time_format_12;
 require_once "db.php";
+
+session_start();

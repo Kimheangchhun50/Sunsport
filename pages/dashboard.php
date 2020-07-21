@@ -12,16 +12,16 @@
             <img src="" alt="">
             <h2>Sun Sport</h2>
           </div>
-          <?php if( is_array($_pricingS) && sizeof($_pricingS)>0 ): ?>
+          <?php if( is_array($_pricings) && sizeof($_pricings)>0 ): ?>
           <div class="price-table">
             <h3>Price Table</h3>
             <table border="1">
               <tr>
-                <th>Field</th>
-                <th>Time</th>
-                <th>Price</th>
+                <th class="td-center">Field</th>
+                <th class="td-center">Time</th>
+                <th class="td-center">Price</th>
               </tr>
-              <?php foreach( $_pricingS as $price_table ): ?>
+              <?php foreach( $_pricings as $price_table ): ?>
               <tr>
                 <td><?php echo $price_table['field_name'].'('.$price_table['field_type'].')'; ?></td>
                 <td><?php echo date($_time_format, strtotime($price_table['from_time'])).' - '.date($_time_format, strtotime($price_table['to_time'])); ?></td>
@@ -48,12 +48,12 @@
           <a class="link" href="<?php echo $current_url.'?date='.date('Y-m-d', strtotime('+1 day', strtotime($the_date))); ?>">></a>
         </div>
       </th>
-      <th colspan="5">Fields</th>
+      <th colspan="5" class="td-center">Fields</th>
     </tr>
     <tr>
-      <th class="td255">Time</th>
+      <th class="td255 td-center">Time</th>
       <?php foreach($_fields as $field): ?>
-      <th><div class="td-head"><?php echo $field['field_name']; ?></div></th> 
+      <th><div class="td-head td-center"><?php echo $field['field_name']; ?></div></th> 
       <?php endforeach; ?> 
     </tr>
     <?php for( $i=strtotime($the_date.' '.$_open_time); $i<strtotime($the_date.' '.$_close_time); $i=$i+strtotime('+1 hour', strtotime($i)) ): ?>
@@ -72,23 +72,22 @@
         }
       ?>
       <?php foreach($_fields as $field): ?>
-      <td class="td-block">
         <?php 
           $from_time = date($_time_format_24, $i);
           $field_name = $field['field_name'];
           $result = get_bookings($the_date, $from_time, $field_name); 
-        ?>
+        ?>      
         <?php if($result->num_rows>0): ?>
           <?php while( $row = mysqli_fetch_assoc($result) ): ?>
-            <?php 
-              
-            ?>
+          <td class="td-block <?php if( billing_exist($row['id']) ) echo 'checkout'; ?>">
             <div class="booking edit-booking" data-id="<?php echo $row['id']; ?>">
               <h2 class="text"><?php echo $row['c_name']; ?></h2>
               <h4 class="sub-text"><?php echo $row['c_phone']; ?></h4>
             </div>
+          </td>
           <?php endwhile; ?>
         <?php else: $disable = false; ?>
+          <td class="td-block">
           <?php if( ($field['field_type']=='small') ): ?>
             <?php if($disable_small): ?>
               <div class="disabled">Not available!</div>
@@ -102,9 +101,9 @@
               <button class="button add-booking" data-time="<?php echo date('H', $i); ?>" data-field="<?php echo $field['field_name']; ?>" data-price="<?php  echo get_price($field['field_name'], date($_time_format_24, $i)); ?>" <?php //if($_today_timestamp>$i) echo 'disabled'; ?>   > + </button>
             <?php endif; ?>
           <?php endif; ?>
-          
+          </td>
         <?php endif; ?>
-      </td>
+      
       <?php endforeach; ?> 
     </tr>
    <?php endfor; ?>

@@ -1,3 +1,4 @@
+<?php if( !isAdmin($_SESSION['userid']) ) die('<div class="error">No access</div>'); ?>
 <div class="report-dialy daily">
 	<div class="nav">
 		<label for="the_date">Date : </label>
@@ -9,16 +10,16 @@
 		<table class="detail" border="1">
 			<thead>
 				<tr>
-					<th>Customer Name</th>
-					<th>Customer Phone</th>
-					<th>Time</th>
-					<th>Field</th>
-					<th>Price</th>
-					<th>Water</th>
-					<th>Extra</th>
-					<th>Amount</th>
-					<th>Remark</th>
-					<th>Status</th>
+					<th class="td-center">Customer Name</th>
+					<th class="td-center">Customer Phone</th>
+					<th class="td-center">Time</th>
+					<th class="td-center">Field</th>
+					<th class="td-center">Price</th>
+					<th class="td-center">Water</th>
+					<th class="td-center">Extra</th>
+					<th class="td-center">Amount</th>
+					<th class="td-center">Remark</th>
+					<!-- <th>Status</th> -->
 				</tr>
 			</thead>
 			<tbody>
@@ -33,7 +34,7 @@
 						<td><?php echo $report['extra']; ?></td>
 						<td>$ <?php echo $report['amount']; ?></td>
 						<td><?php echo $report['remark']; ?></td>
-						<td><?php echo $report['status']; ?></td>
+						<!-- <td><?php echo $report['status']; ?></td> -->
 					</tr>
 				<?php endforeach; ?>
 			</tbody>
@@ -75,10 +76,10 @@
 			<td>Total Booking</td>
 			<td><?php echo $reports['total_booking']; ?></td>
 		</tr>
-		<tr>
+		<!-- <tr>
 			<td>Total Cancel</td>
 			<td><?php echo $reports['total_cancel']; ?></td>
-		</tr>
+		</tr> -->
 		<tr>
 			<td>Total Amount</td>
 			<td>$ <?php echo $reports['total_amount']; ?></td>

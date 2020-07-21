@@ -1,3 +1,4 @@
+<?php if( !isAdmin($_SESSION['userid']) ) die('<div class="error">No access</div>'); ?>
 <div class="report-monthly monthly">
 	<div class="nav">
 		<label for="the_date">Date : </label>
@@ -9,10 +10,10 @@
 		<table class="detail" border="1">
 			<thead>
 				<tr>
-					<th>Date</th>
-					<th>Booking</th>
-					<th>Cancel</th>
-					<th>Amount</th>
+					<th class="td-center">Date</th>
+					<th class="td-center">Booking</th>
+					<!-- <th class="td-center">Cancel</th> -->
+					<th class="td-center">Amount</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -20,7 +21,7 @@
 					<tr>
 						<td><?php echo date($the_date_format, strtotime($report['the_date'])); ?></td>
 						<td><?php echo $report['total_booking']; ?></td>
-						<td><?php echo $report['total_cancel']; ?></td>
+						<!-- <td><?php echo $report['total_cancel']; ?></td> -->
 						<td>$ <?php echo $report['total_amount']; ?></td>
 					</tr>
 				<?php endforeach; ?>
@@ -31,10 +32,10 @@
 				<td>Total Booking</td>
 				<td><?php echo $reports['summary']['total_booking']; ?></td>
 			</tr>
-			<tr>
+			<!-- <tr>
 				<td>Total Cancel</td>
 				<td><?php echo $reports['summary']['total_cancel']; ?></td>
-			</tr>
+			</tr> -->
 			<tr>
 				<td>Total Amount</td>
 				<td>$ <?php echo $reports['summary']['total_amount']; ?></td>

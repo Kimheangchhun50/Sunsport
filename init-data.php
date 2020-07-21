@@ -3,7 +3,7 @@
   $_today_timestamp = time() + 60*60*5;
   $_today_date = date($_date_format, $_today_timestamp);
   $_fields = get_fields();
-  $_pricingS = get_pricings();
+  $_pricings = get_pricings();
   
 
   $conn = conn();

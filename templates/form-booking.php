@@ -1,11 +1,18 @@
-<center class="form-booking form-booking-new">
+<?php 
+	$the_date = isset($_GET['the_date'])?$_GET['the_date']:'';
+	$the_time = isset($_GET['the_time'])?$_GET['the_time']:'';
+	$the_field = isset($_GET['the_field'])?$_GET['the_field']:'';
+	$the_price = isset($_GET['the_price'])?$_GET['the_price']:0;
+ ?>
+<center class="form-booking form-booking-new" id="form-booking-new">
+	<?php var_dump($the_price); ?>
 	<div class="form-wrap">
-		<form class="form" action="<?php echo SITE_URL; ?>/add-booking?date=<?php echo $the_date; ?>" method="POST">
+		<form class="form" action="<?php echo SITE_URL; ?>/submit-booking-new?date=<?php echo $the_date; ?>" method="POST">
 			<h2 class="form-title">New Booking</h2>
 			<table>
 				<tr class="">
 					<th>Date:</th>
-					<th><input type="date" name="the_date"></th>
+					<th><input type="date" name="the_date" value="<?php echo $the_date; ?>"></th>
 				</tr>
 
 				<tr class="">
@@ -13,7 +20,7 @@
 					<th>
 						<select name="the_time">
 							<?php for( $i=strtotime($_open_time); $i<strtotime($_close_time); $i=$i+strtotime('+1 hour', strtotime($i)) ): ?>
-							<option value="<?php echo date('H', $i); ?>"><?php echo date($_time_format, $i); ?> - <?php echo date($_time_format, strtotime('+1 hour',$i)); ?></option>
+							<option <?php if(date('H', $i)==$the_time) echo 'selected'; ?> value="<?php echo date('H', $i); ?>"><?php echo date($_time_format, $i); ?> - <?php echo date($_time_format, strtotime('+1 hour',$i)); ?></option>
 							<?php endfor; ?>							
 						</select>
 					</th>
@@ -23,7 +30,7 @@
 					<th>
 						<select name="the_field">
 							<?php foreach($_fields as $field): ?>
-						      <option value="<?php echo $field['field_name']; ?>"><?php echo $field['field_name']; ?> (<?php echo $field['field_type']; ?>)</option> 
+						      <option <?php if($field['field_name']==$the_field) echo 'selected'; ?> value="<?php echo $field['field_name']; ?>"><?php echo $field['field_name']; ?> (<?php echo $field['field_type']; ?>)</option> 
 						     <?php endforeach; ?> 
 						</select>
 					</th>
@@ -31,7 +38,7 @@
 				<tr class="">
 					<th>Price($):</th>
 					<th>
-						<input type="number" value="0" name="the_price" disabled>
+						<input type="number" name="the_price" disabled value="<?php echo $the_price; ?>">
 					</th>
 				</tr>
 				<!-- Water & Extra -->
