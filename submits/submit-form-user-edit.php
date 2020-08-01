@@ -1,13 +1,14 @@
 <?php 
 
-$redirect = SITE_URL.'/users?tab=user-edit&id=0';
+$redirect = SITE_URL.'/users';
+// $redirect = SITE_URL.'/users?tab=user-edit&id=0';
 if( !isset($_POST['submit_user_edit']) ){
 	$_SESSION['status'] = 0;
 	$_SESSION['message'] = "Form Submit Error!";
 	header('location:'.$redirect); die();
 }
 $id = isset($_POST['the_id'])?intval($_POST['the_id']):0;
-$redirect = SITE_URL.'/users?tab=user-edit&id='.$id;
+// $redirect = SITE_URL.'/users?tab=user-edit&id='.$id;
 if( $id<=0 ){
 	$_SESSION['status'] = 0;
 	$_SESSION['message'] = "Error user id";

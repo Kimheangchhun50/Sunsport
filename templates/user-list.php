@@ -22,7 +22,9 @@
 				<td>
 					<a href="<?php echo SITE_URL; ?>/users?tab=user-change-password&id=<?php echo $user['id'] ?>">Password</a>
 					<a href="<?php echo SITE_URL; ?>/users?tab=user-edit&id=<?php echo $user['id'] ?>">Edit</a>
+					<?php if($user['username']!='admin'): ?>
 					<a href="<?php echo SITE_URL; ?>/submit-user-delete?id=<?php echo $user['id'] ?>">Delete</a>
+					<?php endif; ?>
 				</td>
 			</tr>
 			<?php endforeach; ?>					

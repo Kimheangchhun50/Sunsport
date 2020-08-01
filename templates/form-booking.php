@@ -5,7 +5,7 @@
 	$the_price = isset($_GET['the_price'])?$_GET['the_price']:0;
  ?>
 <center class="form-booking form-booking-new" id="form-booking-new">
-	<?php var_dump($the_price); ?>
+	<?php //var_dump($_fields); ?>
 	<div class="form-wrap">
 		<form class="form" action="<?php echo SITE_URL; ?>/submit-booking-new?date=<?php echo $the_date; ?>" method="POST">
 			<h2 class="form-title">New Booking</h2>

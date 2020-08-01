@@ -79,7 +79,7 @@
         ?>      
         <?php if($result->num_rows>0): ?>
           <?php while( $row = mysqli_fetch_assoc($result) ): ?>
-          <td class="td-block <?php if( billing_exist($row['id']) ) echo 'checkout'; ?>">
+          <td class="td-block <?php if( billing_exist($row['id']) ) echo 'checkout'; ?>" data-time="<?php echo date('H', $i); ?>" data-field="<?php echo $field['field_name']; ?>" data-price="<?php  echo get_price($field['field_name'], date($_time_format_24, $i)); ?>">
             <div class="booking edit-booking" data-id="<?php echo $row['id']; ?>">
               <h2 class="text"><?php echo $row['c_name']; ?></h2>
               <h4 class="sub-text"><?php echo $row['c_phone']; ?></h4>
@@ -87,7 +87,7 @@
           </td>
           <?php endwhile; ?>
         <?php else: $disable = false; ?>
-          <td class="td-block">
+          <td class="td-block" data-time="<?php echo date('H', $i); ?>" data-field="<?php echo $field['field_name']; ?>" data-price="<?php  echo get_price($field['field_name'], date($_time_format_24, $i)); ?>">
           <?php if( ($field['field_type']=='small') ): ?>
             <?php if($disable_small): ?>
               <div class="disabled">Not available!</div>
@@ -110,19 +110,5 @@
 
   </table>
 </div>
-
-<?php if( isset($_SESSION['status']) ): ?>
-<div class="response" style="<?php echo isset($_SESSION['status'])?(intval($_SESSION['status'])==0?'background:red;':''):''; ?>">
-  <h3 class="title"><?php echo isset($_SESSION['status'])?(intval($_SESSION['status'])==0?'Failed!':'Successful!'):'' ?></h3>
-  <p class="message">
-    <?php echo isset($_SESSION['message'])?$_SESSION['message']:'Please report to your administrator?' ?>
-  </p>
-  <button class="btn btn-close-response">X</button>
-</div>
-<?php 
-  $_SESSION['status'] = null;
-  $_SESSION['message'] = null;
-?>
-<?php endif; ?>
 
 <div id="view"></div>

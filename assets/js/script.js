@@ -15,6 +15,9 @@ jQuery(document).ready(function($){
 			$(this).remove();
 		});
 	});
+	setTimeout(function(){
+		$('.response').remove();
+	}, 3000);
 
 	// Add new booking
 	// $('.dashboard').on('click', '.add-booking', function(){
@@ -67,6 +70,16 @@ jQuery(document).ready(function($){
 		link = link.replace(/\s/g, '%20');
 		$('#view #booking_save').attr('href', link);
 	});
+	// Form field
+	$('#view').on('change', '.form-booking .form [name="the_field"], .form-booking .form [name="the_time"]', function(){
+		var field = $('.form-booking .form [name="the_field"] option:selected').val();
+		var time = $('.form-booking .form [name="the_time"] option:selected').val();
+		var price = $('.dashboard .td-block[data-time="'+time+'"][data-field="'+field+'"]');
+		if(price.length>0){
+			$('.form-booking .form [name="the_price"]').val($(price[0]).attr('data-price'));
+		}
+	});
+
 
 
 

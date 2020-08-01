@@ -8,10 +8,12 @@ $current_url = SITE_URL.''.$uri;
 	<?php 
 		// var_dump(preg_match("/id=[0-9]*/i", $uri, $matches));
 		// var_dump($uri);
+		if(isset($_SESSION['username']) && isset($_SESSION['userid'])){
+			include_once SITE_URI."/init-data.php"; 
+		}
 
 		if( $uri=="" || $uri=="/" ){
-			if( isset($_SESSION['username']) && isset($_SESSION['userid']) ){
-				include_once SITE_URI."/init-data.php"; 
+			if( isset($_SESSION['username']) && isset($_SESSION['userid']) ){				
 				require_once SITE_URI."/pages/dashboard.php";
 				require_once SITE_URI."/templates/form-booking.php";
 			}
@@ -72,6 +74,9 @@ $current_url = SITE_URL.''.$uri;
 			include_once SITE_URI."/init-data.php"; 
 			require_once SITE_URI."/pages/pricing.php";
 		}
+		else if( $uri == '/submit-form-pricing' || $uri=='/submit-form-pricing/' ){
+			require_once SITE_URI."/submits/submit-form-pricing.php";
+		}
 		else{
 			require_once SITE_URI."/pages/login.php";
 		}
@@ -80,4 +85,17 @@ $current_url = SITE_URL.''.$uri;
 
 
 	?>
+	<?php if( isset($_SESSION['status']) ): ?>
+	<div class="response" style="<?php echo isset($_SESSION['status'])?(intval($_SESSION['status'])==0?'background:red;':''):''; ?>">
+	  <h3 class="title"><?php echo isset($_SESSION['status'])?(intval($_SESSION['status'])==0?'Failed!':'Successful!'):'' ?></h3>
+	  <p class="message">
+	    <?php echo isset($_SESSION['message'])?$_SESSION['message']:'Please report to your administrator?' ?>
+	  </p>
+	  <button class="btn btn-close-response">X</button>
+	</div>
+	<?php 
+	  $_SESSION['status'] = null;
+	  $_SESSION['message'] = null;
+	?>
+	<?php endif; ?>
 </div>

@@ -5,7 +5,7 @@ function get_bookings($the_date, $from_time, $field_name){
     $conn = conn();
     $stmt = mysqli_stmt_init($conn);
     if( !mysqli_stmt_prepare($stmt, $sql) ){
-      die('<div class="error">SQL error</div>');
+      die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
     }
     mysqli_stmt_bind_param($stmt, "sss", $the_date, $from_time, $field_name);
     mysqli_stmt_execute($stmt);
@@ -18,7 +18,7 @@ function get_booking_type_count($the_date, $from_time, $field_type, $id_out=0){
     $conn = conn();
     $stmt = mysqli_stmt_init($conn);
     if( !mysqli_stmt_prepare($stmt, $sql) ){
-      die('<div class="error">SQL error</div>');
+      die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
     }
     mysqli_stmt_bind_param($stmt, "sssi", $the_date, $from_time, $field_type, $id_out);
     mysqli_stmt_execute($stmt);
@@ -37,7 +37,7 @@ function get_booking_count($the_date, $from_time, $field_name, $id_out=0){
     $conn = conn();
     $stmt = mysqli_stmt_init($conn);
     if( !mysqli_stmt_prepare($stmt, $sql) ){
-      die('<div class="error">SQL error</div>');
+      die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
     }
     mysqli_stmt_bind_param($stmt, "sssi", $the_date, $from_time, $field_name, $id_out);
     mysqli_stmt_execute($stmt);
@@ -57,7 +57,7 @@ function get_fields(){
     $conn = conn();
     $stmt = mysqli_stmt_init($conn);
     if( !mysqli_stmt_prepare($stmt, $sql) ){
-      die('<div class="error">SQL error</div>');
+      die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
     }
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
@@ -81,7 +81,7 @@ function get_pricings(){
     $conn = conn();
     $stmt = mysqli_stmt_init($conn);
     if( !mysqli_stmt_prepare($stmt, $sql) ){
-      die('<div class="error">SQL error</div>');
+      die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
     }
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
@@ -101,7 +101,7 @@ function get_price($field_name, $time){
     $conn = conn();
     $stmt = mysqli_stmt_init($conn);
     if( !mysqli_stmt_prepare($stmt, $sql) ){
-      die('<div class="error">SQL error</div>');
+      die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
     }
     mysqli_stmt_bind_param($stmt, "sss", $field_name, $time, $time);
     mysqli_stmt_execute($stmt);
@@ -114,6 +114,22 @@ function get_price($field_name, $time){
         $r = $row['price'];
     }
     return $r;
+}
+function edit_price( $id, $price ){
+    if( $id<=0 || $price<=0 || empty($id) || empty($price) ){
+        return false;
+    }
+
+    $sql = "UPDATE pricing SET price=? WHERE id=?";
+    $conn = conn();
+    $stmt = mysqli_stmt_init($conn);
+    if( !mysqli_stmt_prepare($stmt, $sql) ){
+      die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
+    }
+    mysqli_stmt_bind_param($stmt, "di", $price, $id );
+    $result = mysqli_stmt_execute($stmt);
+    mysqli_close($conn);
+    return $result;
 }
 
 function add_booking( $data = array() ){
@@ -128,7 +144,7 @@ function add_booking( $data = array() ){
     $conn = conn();
     $stmt = mysqli_stmt_init($conn);
     if( !mysqli_stmt_prepare($stmt, $sql) ){
-      die('<div class="error">SQL error</div>');
+      die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
     }
     mysqli_stmt_bind_param($stmt, "ssssssssis", $data['c_name'], $data['c_phone'], $data['the_date'], $data['from_time'], $data['to_time'], $data['field_name'], $data['field_type'], $data['field_group'], intval($data['price']), $data['remark']);
     $result = mysqli_stmt_execute($stmt);
@@ -148,7 +164,7 @@ function edit_booking( $data = array() ){
     $conn = conn();
     $stmt = mysqli_stmt_init($conn);
     if( !mysqli_stmt_prepare($stmt, $sql) ){
-      die('<div class="error">SQL error</div>');
+      die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
     }
     mysqli_stmt_bind_param($stmt, "ssssssssisi", $data['c_name'], $data['c_phone'], $data['the_date'], $data['from_time'], $data['to_time'], $data['field_name'], $data['field_type'], $data['field_group'], intval($data['price']), $data['remark'], $data['id']);
     $result = mysqli_stmt_execute($stmt);
@@ -161,7 +177,7 @@ function delete_booking( $id){
     $conn = conn();
     $stmt = mysqli_stmt_init($conn);
     if( !mysqli_stmt_prepare($stmt, $sql) ){
-      die('<div class="error">SQL error</div>');
+      die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
     }
     mysqli_stmt_bind_param($stmt, "i", $id);
     $r = mysqli_stmt_execute($stmt);
@@ -175,7 +191,7 @@ function get_booking($id){
     $conn = conn();
     $stmt = mysqli_stmt_init($conn);
     if( !mysqli_stmt_prepare($stmt, $sql) ){
-      die('<div class="error">SQL error</div>');
+      die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
     }
     mysqli_stmt_bind_param($stmt, "i", intval($id));
     mysqli_stmt_execute($stmt);
@@ -194,7 +210,7 @@ function isAdmin($id){
     $conn = conn();
     $stmt = mysqli_stmt_init($conn);
     if( !mysqli_stmt_prepare($stmt, $sql) ){
-      die('<div class="error">SQL error</div>');
+      die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
     }
     mysqli_stmt_bind_param($stmt, "i", intval($id));
     mysqli_stmt_execute($stmt);
@@ -215,7 +231,7 @@ function get_daily_reports($the_date){
     $sql = 'SELECT *, (price+IFNULL(water, 0)+IFNULL(extra, 0)) as amount FROM booking WHERE the_date=?';
     $stmt = mysqli_stmt_init($conn);
     if( !mysqli_stmt_prepare($stmt, $sql) ){
-      die('<div class="error">SQL error</div>');
+      die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
     }
     mysqli_stmt_bind_param($stmt, "s", $the_date);
     mysqli_stmt_execute($stmt);
@@ -243,7 +259,7 @@ function get_daily_reports_summary($the_date){
     $sql = 'SELECT count(*) as the_rows FROM booking WHERE the_date=?';
     $stmt = mysqli_stmt_init($conn);
     if( !mysqli_stmt_prepare($stmt, $sql) ){
-      die('<div class="error">SQL error</div>');
+      die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
     }
     mysqli_stmt_bind_param($stmt, "s", $the_date);
     mysqli_stmt_execute($stmt);
@@ -252,7 +268,7 @@ function get_daily_reports_summary($the_date){
     $sql = 'SELECT sum((price+IFNULL(water, 0)+IFNULL(extra, 0))) as the_rows FROM booking WHERE the_date=?';
     $stmt = mysqli_stmt_init($conn);
     if( !mysqli_stmt_prepare($stmt, $sql) ){
-      die('<div class="error">SQL error</div>');
+      die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
     }
     mysqli_stmt_bind_param($stmt, "s", $the_date);
     mysqli_stmt_execute($stmt);
@@ -261,7 +277,7 @@ function get_daily_reports_summary($the_date){
     $sql = 'SELECT count(*) as the_rows FROM booking WHERE the_date=? AND status=?';
     $stmt = mysqli_stmt_init($conn);
     if( !mysqli_stmt_prepare($stmt, $sql) ){
-      die('<div class="error">SQL error</div>');
+      die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
     }
     $status = 'cancel';
     mysqli_stmt_bind_param($stmt, "ss", $the_date, $status);
@@ -315,7 +331,7 @@ function get_monthly_reports_summary($the_month){
     $sql = 'SELECT count(*) as the_rows FROM booking WHERE the_date>=? AND the_date<?';
     $stmt = mysqli_stmt_init($conn);
     if( !mysqli_stmt_prepare($stmt, $sql) ){
-      die('<div class="error">SQL error</div>');
+      die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
     }
     mysqli_stmt_bind_param($stmt, "ss", $the_date_start, $the_date_end);
     mysqli_stmt_execute($stmt);
@@ -324,7 +340,7 @@ function get_monthly_reports_summary($the_month){
     $sql = 'SELECT sum((price+IFNULL(water, 0)+IFNULL(extra, 0))) as the_rows FROM booking WHERE the_date>=? AND the_date<?';
     $stmt = mysqli_stmt_init($conn);
     if( !mysqli_stmt_prepare($stmt, $sql) ){
-      die('<div class="error">SQL error</div>');
+      die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
     }
     mysqli_stmt_bind_param($stmt, "ss", $the_date_start, $the_date_end);
     mysqli_stmt_execute($stmt);
@@ -333,7 +349,7 @@ function get_monthly_reports_summary($the_month){
     $sql = 'SELECT count(*) as the_rows FROM booking WHERE the_date>=? AND the_date<? AND status=?';
     $stmt = mysqli_stmt_init($conn);
     if( !mysqli_stmt_prepare($stmt, $sql) ){
-      die('<div class="error">SQL error</div>');
+      die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
     }
     $status = 'cancel';
     mysqli_stmt_bind_param($stmt, "sss", $the_date_start, $the_date_end, $status);
@@ -387,7 +403,7 @@ function get_yearly_reports_summary($the_year){
     $sql = 'SELECT count(*) as the_rows FROM booking WHERE the_date>=? AND the_date<?';
     $stmt = mysqli_stmt_init($conn);
     if( !mysqli_stmt_prepare($stmt, $sql) ){
-      die('<div class="error">SQL error</div>');
+      die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
     }
     mysqli_stmt_bind_param($stmt, "ss", $the_date_start, $the_date_end);
     mysqli_stmt_execute($stmt);
@@ -396,7 +412,7 @@ function get_yearly_reports_summary($the_year){
     $sql = 'SELECT sum((price+IFNULL(water, 0)+IFNULL(extra, 0))) as the_rows FROM booking WHERE the_date>=? AND the_date<?';
     $stmt = mysqli_stmt_init($conn);
     if( !mysqli_stmt_prepare($stmt, $sql) ){
-      die('<div class="error">SQL error</div>');
+      die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
     }
     mysqli_stmt_bind_param($stmt, "ss", $the_date_start, $the_date_end);
     mysqli_stmt_execute($stmt);
@@ -405,7 +421,7 @@ function get_yearly_reports_summary($the_year){
     $sql = 'SELECT count(*) as the_rows FROM booking WHERE the_date>=? AND the_date<? AND status=?';
     $stmt = mysqli_stmt_init($conn);
     if( !mysqli_stmt_prepare($stmt, $sql) ){
-      die('<div class="error">SQL error</div>');
+      die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
     }
     $status = 'cancel';
     mysqli_stmt_bind_param($stmt, "sss", $the_date_start, $the_date_end, $status);
@@ -444,7 +460,7 @@ function get_users(){
     $conn = conn();
     $stmt = mysqli_stmt_init($conn);
     if( !mysqli_stmt_prepare($stmt, $sql) ){
-      die('<div class="error">SQL error</div>');
+      die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
     }
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
@@ -461,7 +477,7 @@ function get_user($id=0){
     $conn = conn();
     $stmt = mysqli_stmt_init($conn);
     if( !mysqli_stmt_prepare($stmt, $sql) ){
-      die('<div class="error">SQL error</div>');
+      die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
     }
     mysqli_stmt_bind_param($stmt, "i", $id);
     mysqli_stmt_execute($stmt);
@@ -480,7 +496,7 @@ function username_existed($username=''){
     $conn = conn();
     $stmt = mysqli_stmt_init($conn);
     if( !mysqli_stmt_prepare($stmt, $sql) ){
-      die('<div class="error">SQL error '.mysqli_error($conn).'</div>');
+      die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
     }
     mysqli_stmt_bind_param($stmt, "s", $username);
     mysqli_stmt_execute($stmt);
@@ -506,7 +522,7 @@ function add_user( $data = array() ){
     $conn = conn();
     $stmt = mysqli_stmt_init($conn);
     if( !mysqli_stmt_prepare($stmt, $sql) ){
-      die('<div class="error">SQL error '.mysqli_error($conn).'</div>');
+      die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
     }
     mysqli_stmt_bind_param($stmt, "ssss", $data['the_name'], $data['the_role'], $data['the_username'], $data['the_password'] );
     $result = mysqli_stmt_execute($stmt);
@@ -525,7 +541,7 @@ function edit_user($data){
     $conn = conn();
     $stmt = mysqli_stmt_init($conn);
     if( !mysqli_stmt_prepare($stmt, $sql) ){
-      die('<div class="error">SQL error '.mysqli_error($conn).'</div>');
+      die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
     }
     mysqli_stmt_bind_param($stmt, "ssi", $data['the_name'], $data['the_role'], $data['the_id'] );
     $result = mysqli_stmt_execute($stmt);
@@ -538,7 +554,7 @@ function delete_user($id=0){
     $conn = conn();
     $stmt = mysqli_stmt_init($conn);
     if( !mysqli_stmt_prepare($stmt, $sql) ){
-      die('<div class="error">SQL error</div>');
+      die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
     }
     mysqli_stmt_bind_param($stmt, "i", $id);
     $r = mysqli_stmt_execute($stmt);
@@ -552,7 +568,7 @@ function generate_billing_number(){
     $conn = conn();
     $stmt = mysqli_stmt_init($conn);
     if( !mysqli_stmt_prepare($stmt, $sql) ){
-      die('<div class="error">SQL error</div>');
+      die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
     }
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
@@ -578,7 +594,7 @@ function submit_billing( $data = array() ){
     $conn = conn();
     $stmt = mysqli_stmt_init($conn);
     if( !mysqli_stmt_prepare($stmt, $sql) ){
-      die('<div class="error">SQL error</div>');
+      die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
     }
     mysqli_stmt_bind_param($stmt, "iiiiii", $data['booking_id'], $data['billing_number'], $data['price'], $data['water'], $data['extra'], $data['user_id']);
     $result = mysqli_stmt_execute($stmt);
@@ -592,7 +608,7 @@ function billing_exist($booking_id){
     $conn = conn();
     $stmt = mysqli_stmt_init($conn);
     if( !mysqli_stmt_prepare($stmt, $sql) ){
-      die('<div class="error">SQL error</div>');
+      die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
     }
     mysqli_stmt_bind_param($stmt, "i", $booking_id); 
     mysqli_stmt_execute($stmt);
@@ -614,7 +630,7 @@ function get_booking_billing($id){
     $conn = conn();
     $stmt = mysqli_stmt_init($conn);
     if( !mysqli_stmt_prepare($stmt, $sql) ){
-      die('<div class="error">SQL error</div>');
+      die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
     }
     mysqli_stmt_bind_param($stmt, "i", intval($id));
     mysqli_stmt_execute($stmt);
