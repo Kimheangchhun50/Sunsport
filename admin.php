@@ -3,4 +3,5 @@
 	<a class="link" href="<?php echo SITE_URL.'/users'; ?>">Users</a>
 	<a class="link" href="<?php echo SITE_URL.'/reports'; ?>">Reports</a>
 	<a class="link" href="<?php echo SITE_URL.'/pricing'; ?>">Pricing</a>
+	<a class="link" href="<?php echo SITE_URL.'/expenses'; ?>">Expenses</a>
 </div>

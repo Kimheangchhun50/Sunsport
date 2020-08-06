@@ -18,7 +18,7 @@
 			<div class="billing-brand">
 				<h3>SUN SPORT</h3>
 				<h4>Siem reap, Cambodia</h4>
-				<h4>+855 00000000</h4>
+				<h4>+855 70 551 355</h4>
 			</div>
 			<form class="" action="<?php echo SITE_URL; ?>/submit-billing" method="POST">
 				<table>

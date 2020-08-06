@@ -38,7 +38,7 @@ if( isset($_POST['login_submit']) ){
 ?>
 
 <center class="form form-login">
-	<h1>Sunsport</h1>
+	<h1>Sun Sp<i class="far fa-futbol"></i>rt</h1>
 	<h2>Login</h2>
 	<form action="<?php SITE_URL  ?>" method="post">
 		<div>
