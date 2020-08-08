@@ -413,6 +413,56 @@ textarea {
     background: orange;
     color: white;
 }
+.link-save{
+    color: green;
+}
+.link-cancel{
+    color: red;
+}
+.link-delete{
+    color: #F44336;
+}
+.link-close{
+    color: orange;
+}
+.link-action{
+    color: yellow;
+}
 button:disabled {
     background: #585858;
+}
+
+
+/*.expenses input{
+    max-width: 50px;
+}*/
+.expenses{
+    position: relative;
+}
+.expenses .nav-action{
+    position: absolute;
+    top: 40px;
+    right: 20px;
+}
+.expenses #view{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgb(0, 0, 0, 0.75);
+    display: none;
+}
+#confirm-delete{
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgb(0 0 0 / 0.75);
+    display: none;
+}
+.tr-grand-total{
+    background: #545453;
 }

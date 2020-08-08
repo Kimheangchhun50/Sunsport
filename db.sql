@@ -95,3 +95,13 @@ CREATE TABLE billing(
 	user_id int(11) DEFAULT 0,
 	date_created datetime DEFAULT CURRENT_TIMESTAMP
 );
+
+
+CREATE TABLE expenses(
+	id int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
+	the_date date DEFAULT CURRENT_DATE,
+	item varchar(25) NOT NULL,
+	price double NOT NULL,
+	qty int(8) NOT NULL,
+	date_created datetime DEFAULT CURRENT_TIMESTAMP
+);

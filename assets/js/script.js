@@ -81,23 +81,6 @@ jQuery(document).ready(function($){
 	});
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	// Billing
 	$('.billing-update').on('change', function(){
 		var total = Number($('#billing-price').val()) + Number($('#billing-water').val()) + Number($('#billing-extra').val());
@@ -113,6 +96,42 @@ jQuery(document).ready(function($){
 	// 		$($(this).find('.form-booking-edit')).fadeIn();
 	// 	});
 	// });
+
+
+	// Expenses
+	$('#btn-add-expenses').on('click', function(){
+		$('.expenses #view').show();
+		$('.expenses #view form').attr('action', SITE_URL+'/submit-form-expenses');
+		$('.expenses #view [name="the_date"]').val($('[name="today_date"]').val());
+		$('.expenses #view [name="the_item"]').val('');
+		$('.expenses #view [name="the_price"]').val('');
+		$('.expenses #view [name="the_qty"]').val('');
+	});
+	$('.expenses #view').on('click', '.close', function(){
+		$('.expenses #view').hide();
+	});
+	$('.expenses .edit-expenses').on('click', function(){
+		var id = $(this).attr('data-id');
+		var link = SITE_URL+'/expenses?id='+id+' #form-expenses';
+		$('#view').load(link, function(){
+			$(this).show();
+		});
+	});
+	$('.expenses .delete-expenses').on('click', function(){
+		var id = $(this).attr('data-id');
+		var action = SITE_URL+'/submit-form-expenses-delete';
+		$('#confirm-delete').show();
+		$('#confirm-delete [name="id"]').val(id);
+		$('#confirm-delete form').attr('action', action);
+	});
+	$('.expenses #expenses-date').on('change', function(){
+		window.location.href = window.location.origin+window.location.pathname+'?date='+$(this).val();
+	});
+	$('#confirm-delete').on('click', '.close', function(){
+		$('#confirm-delete').hide();
+		$('#confirm-delete [name="id"]').val('');
+		$('#confirm-delete form').attr('action', '#');
+	});
 
 
 

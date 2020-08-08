@@ -77,6 +77,15 @@ $current_url = SITE_URL.''.$uri;
 		else if( $uri == '/submit-form-pricing' || $uri=='/submit-form-pricing/' ){
 			require_once SITE_URI."/submits/submit-form-pricing.php";
 		}
+		else if( $uri == '/expenses' || $uri=='/expenses/' ){
+			require_once SITE_URI."/pages/expenses.php";
+		}
+		else if( $uri == '/submit-form-expenses' || $uri=='/submit-form-expenses/' ){
+			require_once SITE_URI."/submits/submit-form-expenses.php";
+		}
+		else if( $uri == '/submit-form-expenses-delete' || $uri=='/submit-form-expenses-delete/' ){
+			require_once SITE_URI."/submits/submit-form-expenses-delete.php";
+		}
 		else{
 			require_once SITE_URI."/pages/login.php";
 		}
@@ -98,4 +107,12 @@ $current_url = SITE_URL.''.$uri;
 	  $_SESSION['message'] = null;
 	?>
 	<?php endif; ?>
+	<div id="confirm-delete">
+		<form action="#" class="form" method="post">
+			<h3>Are you sure want to delete?</h3>
+			<input type="hidden" name="id" value="0" id="confirm-delete-id">
+			<input type="submit" name="submit_delete" class="cancel" value="Delete">
+			<input type="button" value="Cancel" class="close">
+		</form>
+	</div>
 </div>

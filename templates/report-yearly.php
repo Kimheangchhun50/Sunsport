@@ -45,6 +45,16 @@
 				<td>Total Amount</td>
 				<td>$ <?php echo $reports['summary']['total_amount']; ?></td>
 			</tr>
+			<tr>
+				<td>Total Expense</td>
+				<td>
+					$ <?php echo get_expense_sum($the_date.'-01-01', date('Y-m-d', strtotime('+1 year', strtotime($the_date.'-01-01')))); ?>
+				</td>
+			</tr>
+			<tr class="tr-grand-total">
+				<td>Grand Total</td>
+				<td>$ <?php echo ($reports['summary']['total_amount'] - get_expense_sum($the_date.'-01-01', date('Y-m-d', strtotime('+1 year', strtotime($the_date.'-01-01'))))); ?></td>
+			</tr>
 		</table>
 	<?php endif; ?>
 </div>

@@ -643,3 +643,133 @@ function get_booking_billing($id){
     }
     return $r;
 }
+
+function add_expense( $data = array() ){
+    if( !isset($data['the_date']) || !isset($data['item']) || !isset($data['price']) || !isset($data['qty']) ){
+        return false;
+    }
+    if( empty($data['the_date']) || empty($data['item']) || empty($data['price']) || empty($data['qty']) ){
+        return false;
+    }
+
+    $sql = "INSERT INTO expenses(the_date, item, price, qty) value(?,?,?,?)";
+    $conn = conn();
+    $stmt = mysqli_stmt_init($conn);
+    if( !mysqli_stmt_prepare($stmt, $sql) ){
+      die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
+    }
+    mysqli_stmt_bind_param($stmt, "ssdi", $data['the_date'], $data['item'], $data['price'], $data['qty'] );
+    $result = mysqli_stmt_execute($stmt);
+    mysqli_close($conn);
+    return $result;
+}
+
+function get_expenses(){
+    $sql = 'SELECT * FROM expenses';
+    $conn = conn();
+    $stmt = mysqli_stmt_init($conn);
+    if( !mysqli_stmt_prepare($stmt, $sql) ){
+      die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
+    }
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    mysqli_close($conn);
+    if($result->num_rows<=0) return array();
+    $r = array();
+    while( $row = mysqli_fetch_assoc($result) ){
+        array_push($r, $row);
+    }
+    return $r;
+}
+
+function get_daily_expenses($date){
+    $sql = 'SELECT * FROM expenses WHERE the_date=?';
+    $conn = conn();
+    $stmt = mysqli_stmt_init($conn);
+    if( !mysqli_stmt_prepare($stmt, $sql) ){
+      die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
+    }
+    mysqli_stmt_bind_param($stmt, "s", $date );
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    mysqli_close($conn);
+    if($result->num_rows<=0) return array();
+    $r = array();
+    while( $row = mysqli_fetch_assoc($result) ){
+        array_push($r, $row);
+    }
+    return $r;
+}
+
+function get_expense($id){
+    if(intval($id)<=0){
+        return array();
+    }
+    $sql = 'SELECT * FROM expenses WHERE id=?';
+    $conn = conn();
+    $stmt = mysqli_stmt_init($conn);
+    if( !mysqli_stmt_prepare($stmt, $sql) ){
+      die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
+    }
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    mysqli_close($conn);
+    if($result->num_rows<=0) return array();
+    $r = array();
+    while( $row = mysqli_fetch_assoc($result) ){
+        $r = $row;
+    }
+    return $r;
+}
+
+function edit_expense($data){
+    if( !isset($data['id']) || !isset($data['the_date']) || !isset($data['item']) || !isset($data['price']) || !isset($data['qty']) ){
+        return false;
+    }
+    if( empty($data['id']) || empty($data['the_date']) || empty($data['item']) || empty($data['price']) || empty($data['qty']) ){
+        return false;
+    }
+
+    $sql = "UPDATE expenses SET the_date=?, item=?, price=?, qty=? WHERE id=?";
+    $conn = conn();
+    $stmt = mysqli_stmt_init($conn);
+    if( !mysqli_stmt_prepare($stmt, $sql) ){
+      die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
+    }
+    mysqli_stmt_bind_param($stmt, "ssdii", $data['the_date'], $data['item'], $data['price'], $data['qty'], $data['id'] );
+    $result = mysqli_stmt_execute($stmt);
+    mysqli_close($conn);
+    return $result;
+}
+function delete_expense($id=0){
+    if($id<=0) return false;
+    $sql = 'DELETE FROM expenses WHERE id=?';
+    $conn = conn();
+    $stmt = mysqli_stmt_init($conn);
+    if( !mysqli_stmt_prepare($stmt, $sql) ){
+      die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
+    }
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    $r = mysqli_stmt_execute($stmt);
+    mysqli_close($conn);
+    return $r;
+}
+function get_expense_sum($date_from, $date_to){
+    $sql = 'SELECT SUM( price * qty ) as sum FROM expenses WHERE the_date>=? AND the_date<=?';
+    $conn = conn();
+    $stmt = mysqli_stmt_init($conn);
+    if( !mysqli_stmt_prepare($stmt, $sql) ){
+      die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
+    }
+    mysqli_stmt_bind_param($stmt, "ss", $date_from, $date_to);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    mysqli_close($conn);
+    if($result->num_rows<=0) return array();
+    $r = 0;
+    while( $row = mysqli_fetch_assoc($result) ){
+        $r = $row['sum'];
+    }
+    return $r;
+}

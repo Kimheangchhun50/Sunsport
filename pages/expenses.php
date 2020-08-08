@@ -1,298 +1,125 @@
-<!DOCTYPE html>
-<html>
-<head>
-<style>
-body {
-	background-color: #275A27;
-	color: white;
-	text-align: center;
-}
-
-.container {
-    margin: 0 auto;
-    width: 1100px;
-}
-.heading2 {
-	color: #275A27;
-	text-align: left;
-}
-
-table {
-  border-collapse: collapse;
-  margin: 0 auto;
-  margin-top: 15px;
-}
-
-table, td,th {
-  border: 2px solid white;
-  padding: 5px;
-}
- th {
- 	width: 150px;
- 	height: 20px;
- }
-th:last-child {
-	width: 165px;
-}
-
-a {
-	padding: 5px;
-	font-weight: 100;
-}
- input.data {
- 	width: calc(100% - 10px);
- 	height: 100%;
- 	text-align: center;
- }
-
- input[type=date] {
- 	padding: 5px;
- }
-
-.div-btn {
- 	margin: 15px 0px 15px 0px;
- 	text-align: left;
- }
-
- .btn {
- 	padding: 7px;
- }
-
-h1, .header {
- 	text-align: left;
- }
-
-h2 {
-	text-align: center;
-
-}
- .header {
- 	display: flex;
- }
-
- .sub-header {
- 	margin: 10px 10px 10px 0px;
-
- }
-
- button.btn.report {
- 	border: 2px solid;
- 	background-color: #2196f3;
- 	color: white;
- }
-
-
- button.btn.report:hover {
-    border-color: black;
-    color: black;
-}
-
- button.btn.add-col {
- 	border-radius: 2px;
- 	border: 2px solid;
- 	background-color: #2196f3;
- 	color: white;
- }
- button.btn.add-col:hover {
-    border-color: black;
-    color: black;
-}
-
-.form-popup {
-	width: 300px;
-	height: 400px;
-	margin: 0 auto;
-	display: none;
-	position: relative;
-	bottom: 0;
-	right: 15px;
-	border: 2px solid #f1f1f1;
-	z-index: 9;
-	background-color: white;
-}
-
-.choose-report {
-	margin: 15px 50px 15px;
-	text-align: left;
-}
-/* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 80px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-.modal-content {
-  background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  height: 80%;
-}
-
-.close {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-#monthly {
-	border: 2px solid white;
-	background-color: #2196f3;
-	color: #fff;
-	padding: 15px;
-	width: 125px;
-}
-
- button#monthly:hover {
-    border-color: black;
-    color: black;
-}
-
-#yearly {
-	border: 2px solid white;
-	background-color: #ffc000;
-	color: #fff;
-	padding: 15px;
-	width: 125px;
-}
-
- button#yearly:hover {
-    border-color: black;
-    color: black;
-}
-
-#myBtn {
- 	border: 2px solid;
- 	background-color: #2196f3;
- 	color: white;
- }
-
-#myBtn:hover {
-    border-color: black;
-    color: black;
-}
-
-</style>
-</head>
-<body>
-<div class="container">
-<h1>Expenses</h1>
-<div class="header">
-	<div  class="sub-header"><button class="btn report" id="myBtn">Expenses Report</button></div>
-</div>
-
-<table>
-	  <tr>
-	  	<th>No</th>
-	  	<th>Date</th>
-	    <th>Item</th>
-	    <th>Unit Price</th>
-	    <th>Quantity</th>
-	    <th>Sub Total</th>
-	    <th>Action</th>
-	  </tr>
-	  <tr>
-		 <th>S001</th>
-		 <th>08-03-20</th>
-		 <th>Electricity</th>
-		 <th>58.25$</th>
-		 <th>1</th>
-		 <th>58.25$</th>
-		 <th>
-			<a href="" style="color: yellow;">Edit</a>
-			<a href="" style="color: #ff1d1d;">Delete</a>
-		 </th>
-		</tr>
-
-		 <tr>
-		 <th>S002</th>
-		 <th>08-04-20</th>
-		 <th>Water Supply</th>
-		 <th>45.15$</th>
-		 <th>1</th>
-		 <th>45.15$</th>
-		 <th>
-			<a href="" style="color: yellow;">Edit</a>
-			<a href="" style="color: #ff1d1d;">Delete</a>
-		 </th>
-		</tr>
-
-		 <tr>
-		 <th>S003</th>
-		 <th>08-05-20</th>
-		 <th>Ball</th>
-		 <th>9.25$</th>
-		 <th>5</th>
-		 <th>46.25$</th>
-		 <th>
-			<a href="" style="color: yellow;">Edit</a>
-			<a href="" style="color: #ff1d1d;">Delete</a>
-		 </th>
-		</tr>
-
-		 <tr>
-		 <th>S004</th>
-		 <th>08-05-20</th>
-		 <th>Mineral Water</th>
-		 <th>1.50$</th>
-		 <th>50</th>
-		 <th>75.00$</th>
-		 <th>
-			<a href="" style="color: yellow;">Edit</a>
-			<a href="" style="color: #ff1d1d;">Delete</a>
-		 </th>
-		</tr>
-	  <tr>
-		 <th>S005</th>
-		 <th><input type="date" name=""></th>
-		 <th><input class="data" type="name" name="" placeholder="empty"></th>
-		 <th><input class="data" type="" name="" placeholder="0.00$"></th>
-		 <th><input class="data" type="number" name="" placeholder="empty"></th>
-		 <th><input class="data" type="" placeholder="0.00$" ></th>
-		 <th>
-			<a href="" style="color: #2dec2d;">Save</a>
-			<a href="" style="color: #ff1d1d;">Delete</a>
-		 </th>
-		</tr>
-</table>
-
-<div class="div-btn">
-	<button class="btn add-col">Add Expense</button>
-</div>
-
-<div id="myModal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <div class="choose-report">
-    	<h2 class="heading2">Choose your reports option</h2>
-	    	<button id="monthly">Monthly</button> 
-	    	<button id="yearly">Yearly</button> 
+<?php 
+	// var_dump(get_expense_sum('2020-08-07', '2020-08-08'));
+ ?>
+<div class="page-container expenses">
+	<input type="hidden" name="today_date" value="<?php echo $_today_date; ?>">
+	<!--  -->
+	<div id="view">
+		<div class="form form-expenses" id="form-expenses">
+			<?php 
+				$the_date = $_today_date;
+				$the_item = '';
+				$the_price = '';
+				$the_qty = '';
+				$action = SITE_URL.'/submit-form-expenses';
+				$id = isset($_GET['id'])?intval($_GET['id']):0;
+				if($id>0){
+					$the_expense = get_expense($id);
+					if(is_array($the_expense) && sizeof($the_expense)>0){
+						$the_date = $the_expense['the_date'];
+						$the_item = $the_expense['item'];
+						$the_price = $the_expense['price'];
+						$the_qty = $the_expense['qty'];
+						$action .= '?id='.$the_expense['id'];
+					}
+					else{
+						echo '<h3>Something wrong!<h3>';
+					}
+				}
+			?>
+			<form action="<?php echo $action; ?>" method="POST">
+				<table>
+					<tr>
+						<th>Date</th>
+						<td><input type="date" name="the_date" value="<?php echo $the_date; ?>"></td>
+					</tr>
+					<tr>
+						<th>Item</th>
+						<td><input type="text" name="the_item" value="<?php echo $the_item; ?>"></td>
+					</tr>
+					<tr>
+						<th>Unit Price($)</th>
+						<td><input type="number" step="0.01" name="the_price" value="<?php echo $the_price; ?>"></td>
+					</tr>
+					<tr>
+						<th>Quantity</th>
+						<td><input type="number" name="the_qty" value="<?php echo $the_qty; ?>"></td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<div style="text-align: center;width: 100%;">
+								<input type="submit" name="submit_expenses" value="Save" class="save">
+								<input type="button" name="cancel" value="Cancel" class="close">
+							</div>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
 	</div>
-  </div>
+	<!--  -->
+	<h2 class="title">Expenses</h2>
+	<?php $date = isset($_GET['date'])?$_GET['date']:$_today_date ?>
+	<div class="nav-action">
+		<a class="btn link" href="<?php echo $current_url.'?date='.date('Y-m-d', strtotime('-1 day', strtotime($date))); ?>"> << </a>
+		<a class="btn link" href="<?php echo $current_url.'?date='.date('Y-m-d', strtotime('+1 day', strtotime($date))); ?>"> >> </a>
+		<input type="date" value="<?php echo $date; ?>" id="expenses-date">
+		<button class="btn" id="btn-add-expenses">Add Expense</button>
+	</div>
+	<!-- <div class="header">
+		<div  class="sub-header"><button class="btn report" id="myBtn">Expenses Report</button></div>
+	</div> -->
+	<?php $expenses = get_daily_expenses($date); ?>
+	<?php if( is_array($expenses) && sizeof($expenses)>0 ): ?>
+	<table border="1">
+		<tr>
+			<th>No</th>
+			<th>Date</th>
+			<th>Item</th>
+			<th>Unit Price</th>
+			<th>Quantity</th>
+			<th>Sub Total</th>
+			<th>Action</th>
+		</tr>
+		<?php $i=0; foreach ($expenses as $expense): $i++; ?>
+		<tr>
+			<th><?php echo sprintf('%03d', $i) ?></th>
+			<th><?php echo $expense['the_date'] ?></th>
+			<th><?php echo $expense['item'] ?></th>
+			<th>$ <?php echo $expense['price'] ?></th>
+			<th><?php echo $expense['qty'] ?></th>
+			<th>$ <?php echo (floatval($expense['price']) * intval($expense['qty']));  ?></th>
+			<th>
+				<a href="#" class="link-action edit-expenses" data-id="<?php echo $expense['id'] ?>">Edit</a>
+				<a href="#" class="link-cancel delete-expenses" data-id="<?php echo $expense['id'] ?>">Delete</a>
+			</th>
+		</tr>		
+		<?php endforeach; ?>
+	</table>
+	<table border="1" style="max-width: 300px;margin-top: 20px;">
+		<tr>
+			<td>Total</td>
+			<td>$ <?php echo get_expense_sum($date,$date); ?></td>
+		</tr>
+	</table>
+	<?php else: ?>
+		<p>No item</p>
+	<?php endif; ?>
 
+
+
+<!-- 	<div id="myModal" class="modal">
+	  <div class="modal-content">
+	    <span class="close">&times;</span>
+	    <div class="choose-report">
+	    	<h2 class="heading2">Choose your reports option</h2>
+		    	<button id="monthly">Monthly</button> 
+		    	<button id="yearly">Yearly</button> 
+		</div>
+	  </div>
+	</div>
+ -->
 </div>
-
-</div>
-</body>
-
 <script>
 // Get the modal
 var modal = document.getElementById("myModal");
@@ -320,4 +147,3 @@ window.onclick = function(event) {
   }
 }
 </script>
-</html>
