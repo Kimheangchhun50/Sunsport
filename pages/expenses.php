@@ -1,6 +1,3 @@
-<?php 
-	// var_dump(get_expense_sum('2020-08-07', '2020-08-08'));
- ?>
 <div class="page-container expenses">
 	<input type="hidden" name="today_date" value="<?php echo $_today_date; ?>">
 	<!--  -->
@@ -66,9 +63,7 @@
 		<input type="date" value="<?php echo $date; ?>" id="expenses-date">
 		<button class="btn" id="btn-add-expenses">Add Expense</button>
 	</div>
-	<!-- <div class="header">
-		<div  class="sub-header"><button class="btn report" id="myBtn">Expenses Report</button></div>
-	</div> -->
+
 	<?php $expenses = get_daily_expenses($date); ?>
 	<?php if( is_array($expenses) && sizeof($expenses)>0 ): ?>
 	<table border="1">
@@ -105,45 +100,4 @@
 	<?php else: ?>
 		<p>No item</p>
 	<?php endif; ?>
-
-
-
-<!-- 	<div id="myModal" class="modal">
-	  <div class="modal-content">
-	    <span class="close">&times;</span>
-	    <div class="choose-report">
-	    	<h2 class="heading2">Choose your reports option</h2>
-		    	<button id="monthly">Monthly</button> 
-		    	<button id="yearly">Yearly</button> 
-		</div>
-	  </div>
-	</div>
- -->
 </div>
-<script>
-// Get the modal
-var modal = document.getElementById("myModal");
-
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal 
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
-</script>

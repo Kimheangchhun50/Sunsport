@@ -102,6 +102,6 @@ CREATE TABLE expenses(
 	the_date date DEFAULT CURRENT_DATE,
 	item varchar(25) NOT NULL,
 	price double NOT NULL,
-	qty int(8) NOT NULL,
+	qty int(8) NOT NULL DEFAULT 1,
 	date_created datetime DEFAULT CURRENT_TIMESTAMP
 );
