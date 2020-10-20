@@ -55,7 +55,7 @@
       <th><div class="td-head td-center"><?php echo $field['field_name']; ?></div></th> 
       <?php endforeach; ?> 
     </tr>
-    <?php for( $i=strtotime($the_date.' '.$_open_time); $i<strtotime($the_date.' '.$_close_time); $i=$i+strtotime('+1 hour', strtotime($i)) ): ?>
+    <?php for( $i=strtotime($the_date.' '.$_open_time); $i<strtotime($the_date.' '.$_close_time); $i=strtotime('+1 hour', $i) ): ?>
     <tr>
       <td class="td-time td255"><?php echo date($_time_format, $i); ?> - <?php echo date($_time_format, strtotime('+1 hour',$i)); ?></td>
       <?php 

@@ -146,7 +146,8 @@ function add_booking( $data = array() ){
     if( !mysqli_stmt_prepare($stmt, $sql) ){
       die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
     }
-    mysqli_stmt_bind_param($stmt, "ssssssssis", $data['c_name'], $data['c_phone'], $data['the_date'], $data['from_time'], $data['to_time'], $data['field_name'], $data['field_type'], $data['field_group'], intval($data['price']), $data['remark']);
+    $data['price'] = intval($data['price']);
+    mysqli_stmt_bind_param($stmt, "ssssssssis", $data['c_name'], $data['c_phone'], $data['the_date'], $data['from_time'], $data['to_time'], $data['field_name'], $data['field_type'], $data['field_group'], $data['price'], $data['remark']);
     $result = mysqli_stmt_execute($stmt);
     mysqli_close($conn);
     return $result;
@@ -166,7 +167,8 @@ function edit_booking( $data = array() ){
     if( !mysqli_stmt_prepare($stmt, $sql) ){
       die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
     }
-    mysqli_stmt_bind_param($stmt, "ssssssssisi", $data['c_name'], $data['c_phone'], $data['the_date'], $data['from_time'], $data['to_time'], $data['field_name'], $data['field_type'], $data['field_group'], intval($data['price']), $data['remark'], $data['id']);
+    $data['price'] = intval($data['price']);
+    mysqli_stmt_bind_param($stmt, "ssssssssisi", $data['c_name'], $data['c_phone'], $data['the_date'], $data['from_time'], $data['to_time'], $data['field_name'], $data['field_type'], $data['field_group'], $data['price'], $data['remark'], $data['id']);
     $result = mysqli_stmt_execute($stmt);
     mysqli_close($conn);
     return $result;
@@ -212,7 +214,8 @@ function isAdmin($id){
     if( !mysqli_stmt_prepare($stmt, $sql) ){
       die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
     }
-    mysqli_stmt_bind_param($stmt, "i", intval($id));
+    $id = intval($id);
+    mysqli_stmt_bind_param($stmt, "i", $id);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
     mysqli_close($conn);
@@ -632,7 +635,8 @@ function get_booking_billing($id){
     if( !mysqli_stmt_prepare($stmt, $sql) ){
       die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
     }
-    mysqli_stmt_bind_param($stmt, "i", intval($id));
+    $id = intval($id);
+    mysqli_stmt_bind_param($stmt, "i", $id);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
     mysqli_close($conn);

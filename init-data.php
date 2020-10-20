@@ -15,5 +15,7 @@
       $_close_time = $row['_close_time'];
     }
   }
+  // var_dump($_open_time);
+  // var_dump($_close_time);
   mysqli_close($conn);
 
