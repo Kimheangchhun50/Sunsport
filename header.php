@@ -2,10 +2,12 @@
 <html>
 <head>
 	<title></title>
-	<link rel="stylesheet" href="<?php echo SITE_URL; ?>/fontawesome-free-5.13.1-web/css/all.css"></link>
+	
+	<link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/fontawesome-free-5.13.1-web/css/all.css"></link>
 
-	<link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/changa/Changa-VariableFont_wght.ttf"></link>
-	<link href="https://fonts.googleapis.com/css2?family=Changa:wght@400&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="<?php echo SITE_URL; ?>/assets/fonts/static/Piazzolla-Black-opsz=10.ttf">
+
+	<link href="https://fonts.googleapis.com/css2?family=Piazzolla:wght@100&display=swap" rel="stylesheet">
 
 	<link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/style.css">
 	<script>

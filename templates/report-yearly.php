@@ -8,8 +8,8 @@
 			<option value="<?php echo $i; ?>" <?php echo $the_date==$i?'selected':''; ?> ><?php echo $i; ?></option>
 			<?php endfor; ?>
 		</select>
-		<a class="link" href="<?php echo $current_url.'?report='.$report_type.'&date='.(intval($the_date)-1); ?>"> << </a>
-		<a class="link" href="<?php echo $current_url.'?report='.$report_type.'&date='.(intval($the_date)+1); ?>"> >> </a>
+		<a class="link" href="<?php echo $current_url.'?report='.$report_type.'&date='.(intval($the_date)-1); ?>"> <i class="fas fa-backward"></i> </a>
+		<a class="link" href="<?php echo $current_url.'?report='.$report_type.'&date='.(intval($the_date)+1); ?>"> <i class="fas fa-forward"></i> </a>
 	</div>
 	<?php if( isset($reports['reports']) && is_array($reports['reports']) && sizeof($reports['reports'])>0 ): ?>
 		<table class="detail" border="1">

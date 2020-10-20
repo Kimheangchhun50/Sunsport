@@ -9,12 +9,12 @@
 		<form class="form" action="<?php echo SITE_URL; ?>/submit-booking-edit?date=<?php echo $booking['the_date']; ?>" method="POST">
 			<h2 class="form-title">View/Edit Booking</h2>
 			<table>
-				<tr class="">
+				<tr class="view-edit">
 					<th>Date:</th>
 					<th><input class="form-control" type="date" name="the_date" value="<?php echo $booking['the_date']; ?>"></th>
 				</tr>
 
-				<tr class="">
+				<tr class="view-edit">
 					<th>Time:</th>
 					<th>
 						<select class="form-control" name="the_time">
@@ -24,7 +24,7 @@
 						</select>
 					</th>
 				</tr>
-				<tr class="">
+				<tr class="view-edit">
 					<th>Field:</th>
 					<th>
 						<select class="form-control" name="the_field">
@@ -34,7 +34,7 @@
 						</select>
 					</th>
 				</tr>
-				<tr class="">
+				<tr class="view-edit">
 					<th>Price($):</th>
 					<th>
 						<input class="form-control" type="number" value="<?php echo $booking['price']; ?>" name="the_price" disabled>
@@ -54,16 +54,16 @@
 					<th>Clients Name:</th>
 					<th><input class="form-control" type="text" name="the_name" value="<?php echo $booking['c_name']; ?>"></th>
 				</tr>
-				<tr>
+				<tr class="view-edit">
 					<th>Phone Number:</th>
 					<th><input class="form-control" type="text" name="the_phone" value="<?php echo $booking['c_phone']; ?>"></th>
 				</tr>
 
-				<tr>
+				<tr class="view-edit">
 				<th>Remark:</th>
 					<th><textarea class="form-control" name="the_remark" id="" ><?php echo trim($booking['remark']); ?></textarea></th>
 				</tr>
-			    <tr>
+			    <tr class="view-edit">
 			    	<th colspan="2" class="center">
 			    		<input type="hidden" value="<?php echo $booking['id']; ?>" id="booking_edit_id">
 			    		<a href="#" id="booking_save">			    			

@@ -58,8 +58,8 @@
 	<h2 class="title">Expenses</h2>
 	<?php $date = isset($_GET['date'])?$_GET['date']:$_today_date ?>
 	<div class="nav-action">
-		<a class="btn link" href="<?php echo $current_url.'?date='.date('Y-m-d', strtotime('-1 day', strtotime($date))); ?>"> << </a>
-		<a class="btn link" href="<?php echo $current_url.'?date='.date('Y-m-d', strtotime('+1 day', strtotime($date))); ?>"> >> </a>
+		<a class="btn link" href="<?php echo $current_url.'?date='.date('Y-m-d', strtotime('-1 day', strtotime($date))); ?>"> <i class="fas fa-backward"></i> </a>
+		<a class="btn link" href="<?php echo $current_url.'?date='.date('Y-m-d', strtotime('+1 day', strtotime($date))); ?>"> <i class="fas fa-forward"></i> </a>
 		<input type="date" value="<?php echo $date; ?>" id="expenses-date">
 		<button class="btn" id="btn-add-expenses">Add Expense</button>
 	</div>

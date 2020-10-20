@@ -1,7 +1,8 @@
+
 *{
 	margin: 0;
 	padding: 0;
-	font-family: 'Changa', sans-serif;
+	font-family: 'Piazzolla', serif;
     box-sizing: border-box;
 }
 body {
@@ -13,9 +14,11 @@ body {
 }
 
 h1 {
-	font-size: 55px;
+	font-size: 45px;
 }
-
+a {
+    text-decoration: none;
+}
 table{
 	width: 100%;
 	border-collapse: collapse;
@@ -28,11 +31,11 @@ table td, table th{
 	align-self: center;
 	/*border: 1px solid white;*/
 	text-align: center;
-	height: 52px;
+	height: 40px;
 }
-table th{
+/*table th{
     padding: 15px;
-}
+}*/
 
 i.far.fa-futbol {
     font-size: 40px;
@@ -68,9 +71,8 @@ i.far.fa-futbol {
     max-width: 520px;
     margin: 0 auto;
     border: 1px solid #fff;
-    padding: 40px;
-    margin-top: 100px;
-    margin-bottom: 100px;
+    padding: 20px 40px;
+    margin-top: 25px;
     border-radius: 5px;
     background: #275a27;
 }
@@ -141,10 +143,12 @@ textarea {
 }
 /*form form-login*/
 .form.form-login{
-    width: 400px;
+    width: 450px;
+    height: 450px;
     box-shadow: 1px 1px 10px 1px;
     border-radius: 50%;
     background-color: #163e16;
+    line-height: 60px;
 
 }
 /*Dashboard*/
@@ -175,6 +179,11 @@ textarea {
     background: black;
     margin-right: 10px
 }
+
+.dashboard .side .logo h2{
+    margin: 0 auto;
+    font-size: 40px;
+}
 .dashboard .side .logout{
 	margin: 20px 0;
 }
@@ -198,6 +207,7 @@ textarea {
 .admin-panel .link{
     margin-right: 20px;
     color: #275a27;
+    font-weight: 600;
 }
 
 .page-container {
@@ -274,7 +284,7 @@ textarea {
 .billing{
     /*display: flex;
     flex-wrap: wrap;*/
-    width: 500px;
+    width: 375px;
     border: 1px solid;
     padding: 5px 15px;
 }
@@ -285,9 +295,10 @@ textarea {
 }
 
 .form-billing td, th {
-    text-align: left;
+    text-align: left!important;
     height: auto;
     padding: 5px 0;
+    height: 30px!important;
 }
 .form-billing table input{
     width: 100%;
@@ -465,4 +476,8 @@ button:disabled {
 }
 .tr-grand-total{
     background: #545453;
+}
+
+button.print {
+    margin: 0 8px;
 }

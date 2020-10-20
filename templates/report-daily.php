@@ -3,8 +3,8 @@
 	<div class="nav">
 		<label for="the_date">Date : </label>
 		<input type="date" id="the_date" value="<?php echo $the_date; ?>">
-		<a class="link" href="<?php echo $current_url.'?report='.$report_type.'&date='.date('Y-m-d', strtotime('-1 day', strtotime($the_date))); ?>"> << </a>
-		<a class="link" href="<?php echo $current_url.'?report='.$report_type.'&date='.date('Y-m-d', strtotime('+1 day', strtotime($the_date))); ?>"> >> </a>
+		<a class="link" href="<?php echo $current_url.'?report='.$report_type.'&date='.date('Y-m-d', strtotime('-1 day', strtotime($the_date))); ?>"> <i class="fas fa-step-backward"></i> </a>
+		<a class="link" href="<?php echo $current_url.'?report='.$report_type.'&date='.date('Y-m-d', strtotime('+1 day', strtotime($the_date))); ?>"> <i class="fas fa-step-forward"></i> </a>
 	</div>
 	<?php if( isset($reports['bookings']) && is_array($reports['bookings']) && sizeof($reports['bookings'])>0 ): ?>
 		<table class="detail" border="1">

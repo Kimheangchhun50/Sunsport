@@ -9,7 +9,6 @@
       <td rowspan="0" style="vertical-align: top; min-width: 255px;">
         <div class="side">
           <div class="logo">
-            <img src="" alt="">
             <h2>Sun Sport</h2>
           </div>
           <?php if( is_array($_pricings) && sizeof($_pricings)>0 ): ?>
@@ -44,8 +43,8 @@
           <label name="date">Date:</label>
           <input type="date" value="<?php echo $the_date; ?>" id="the_date">
           <input type="hidden" value="<?php echo $the_date; ?>" id="date">
-          <a class="link" href="<?php echo $current_url.'?date='.date('Y-m-d', strtotime('-1 day', strtotime($the_date))); ?>"><</a>
-          <a class="link" href="<?php echo $current_url.'?date='.date('Y-m-d', strtotime('+1 day', strtotime($the_date))); ?>">></a>
+          <a class="link" href="<?php echo $current_url.'?date='.date('Y-m-d', strtotime('-1 day', strtotime($the_date))); ?>"><i class="fas fa-backward"></i></a>
+          <a class="link" href="<?php echo $current_url.'?date='.date('Y-m-d', strtotime('+1 day', strtotime($the_date))); ?>"><i class="fas fa-forward"></i></a>
         </div>
       </th>
       <th colspan="5" class="td-center">Fields</th>

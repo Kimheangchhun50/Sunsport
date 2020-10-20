@@ -59,7 +59,7 @@
 			    <tr>
 			    	<th colspan="2" class="center">
 			    		<input type="submit" value="Save" class="save" name="submit_booking">
-			    		<input type="button" value="Cose" class="close">
+			    		<input type="button" value="Close" class="close">
 			    	</th>
 			    </tr>
 			</table>

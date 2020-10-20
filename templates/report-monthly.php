@@ -3,8 +3,8 @@
 	<div class="nav">
 		<label for="the_date">Date : </label>
 		<input type="month" id="the_date" value="<?php echo $the_date; ?>">
-		<a class="link" href="<?php echo $current_url.'?report='.$report_type.'&date='.date($_month_format, strtotime('-1 month', strtotime($the_date))); ?>"> << </a>
-		<a class="link" href="<?php echo $current_url.'?report='.$report_type.'&date='.date($_month_format, strtotime('+1 month', strtotime($the_date))); ?>"> >> </a>
+		<a class="link" href="<?php echo $current_url.'?report='.$report_type.'&date='.date($_month_format, strtotime('-1 month', strtotime($the_date))); ?>"> <i class="fas fa-backward"></i> </a>
+		<a class="link" href="<?php echo $current_url.'?report='.$report_type.'&date='.date($_month_format, strtotime('+1 month', strtotime($the_date))); ?>"> <i class="fas fa-forward"></i> </a>
 	</div>
 	<?php if( isset($reports['reports']) && is_array($reports['reports']) && sizeof($reports['reports'])>0 ): ?>
 		<table class="detail" border="1">

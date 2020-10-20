@@ -25,6 +25,7 @@
 			<option value="monthly" <?php echo $report_type == 'monthly'?'selected':''; ?> >Monthly</option>
 			<option value="yearly" <?php echo $report_type == 'yearly'?'selected':''; ?> >Yearly</option>
 		</select>
+		<div><button class="print" onclick="window.print()">print <i class="fas fa-print"></i></button></div>
 	</div>
 	<?php 
 		if( $report_type == 'yearly' ){
