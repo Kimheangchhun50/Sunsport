@@ -231,7 +231,7 @@ function isAdmin($id){
 
 function get_daily_reports($the_date){
     $conn = conn();
-    $sql = 'SELECT *, (price+IFNULL(water, 0)+IFNULL(extra, 0)) as amount FROM booking WHERE the_date=?';
+    $sql = "SELECT *, (`billing`.`price`+IFNULL(`billing`.`water`, 0)+IFNULL(`billing`.`extra`, 0)) as amount FROM booking INNER JOIN billing ON `booking`.`id` = `billing`.`booking_id` WHERE the_date=? ";
     $stmt = mysqli_stmt_init($conn);
     if( !mysqli_stmt_prepare($stmt, $sql) ){
       die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
@@ -268,7 +268,7 @@ function get_daily_reports_summary($the_date){
     mysqli_stmt_execute($stmt);
     $r_total_booking = mysqli_stmt_get_result($stmt);
 
-    $sql = 'SELECT sum((price+IFNULL(water, 0)+IFNULL(extra, 0))) as the_rows FROM booking WHERE the_date=?';
+    $sql = 'SELECT sum((`billing`.`price`+IFNULL(`billing`.`water`, 0)+IFNULL(`billing`.`extra`, 0))) as the_rows FROM booking INNER JOIN `billing` on `billing`.`booking_id` = `booking`.`id` WHERE the_date=?';
     $stmt = mysqli_stmt_init($conn);
     if( !mysqli_stmt_prepare($stmt, $sql) ){
       die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
@@ -340,7 +340,7 @@ function get_monthly_reports_summary($the_month){
     mysqli_stmt_execute($stmt);
     $r_total_booking = mysqli_stmt_get_result($stmt);
 
-    $sql = 'SELECT sum((price+IFNULL(water, 0)+IFNULL(extra, 0))) as the_rows FROM booking WHERE the_date>=? AND the_date<?';
+    $sql = 'SELECT sum((`billing`.`price`+IFNULL(`billing`.`water`, 0)+IFNULL(`billing`.`extra`, 0))) as the_rows FROM booking INNER JOIN `billing` on `billing`.`booking_id` = `booking`.`id` WHERE the_date>=? AND the_date<?';
     $stmt = mysqli_stmt_init($conn);
     if( !mysqli_stmt_prepare($stmt, $sql) ){
       die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
@@ -412,7 +412,7 @@ function get_yearly_reports_summary($the_year){
     mysqli_stmt_execute($stmt);
     $r_total_booking = mysqli_stmt_get_result($stmt);
 
-    $sql = 'SELECT sum((price+IFNULL(water, 0)+IFNULL(extra, 0))) as the_rows FROM booking WHERE the_date>=? AND the_date<?';
+    $sql = 'SELECT sum((`billing`.`price`+IFNULL(`billing`.`water`, 0)+IFNULL(`billing`.`extra`, 0))) as the_rows FROM booking INNER JOIN `billing` on `billing`.`booking_id` = `booking`.`id` WHERE the_date>=? AND the_date<?';
     $stmt = mysqli_stmt_init($conn);
     if( !mysqli_stmt_prepare($stmt, $sql) ){
       die('<div class="error">SQL error: '.mysqli_error($conn).'</div>');
